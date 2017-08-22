@@ -1,0 +1,1 @@
+[2017-08-18 14:55:16] log.ERROR: Something went Wrong in Email Class - sendUserActivationEmail():Connection could not be established with host turkey65536@gmail.com [php_network_getaddresses: getaddrinfo failed: 在搜尋資料庫時發生一個無法恢復的錯誤。  #0] [] []

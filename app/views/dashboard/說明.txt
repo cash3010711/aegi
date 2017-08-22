@@ -1,0 +1,14 @@
+admin->
+calender->行事曆
+layouts->頁面部分的公同顯示部分
+project->計畫
+reports->報表
+tasks->任務
+timesheet->時程表
+todo->
+users->系統管理員
+
+credits->
+default->每個頁面最上面顯示的東西
+index->總覽
+roles->

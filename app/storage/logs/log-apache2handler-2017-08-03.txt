@@ -1,0 +1,6 @@
+[2017-08-03 14:59:06] log.ERROR: Something Went Wrong in Install Controller Repository - addUserWithDetails():A user already exists with login [turkey65536@gmail.com], logins must be unique for users. [] []
+[2017-08-03 14:59:37] log.ERROR: Something Went Wrong in Install Controller Repository - addUserWithDetails():A user already exists with login [turkey65536@gmail.com], logins must be unique for users. [] []
+[2017-08-03 15:00:39] log.ERROR: Something Went Wrong in Install Controller Repository - addUserWithDetails():A user already exists with login [turkey65536@gmail.com], logins must be unique for users. [] []
+[2017-08-03 15:02:37] log.ERROR: Something Went Wrong in Install Controller Repository - addUserWithDetails():A user already exists with login [turkey65536@gmail.com], logins must be unique for users. [] []
+[2017-08-03 15:09:30] log.ERROR: Something Went Wrong in Install Controller Repository - addUserWithDetails():A user already exists with login [turkey65536@gmail.com], logins must be unique for users. [] []
+[2017-08-03 15:09:46] log.ERROR: Something Went Wrong in Install Controller Repository - addUserWithDetails():A user already exists with login [turkey65536@gmail.com], logins must be unique for users. [] []

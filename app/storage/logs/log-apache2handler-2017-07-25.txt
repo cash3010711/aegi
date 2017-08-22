@@ -1,0 +1,1 @@
+[2017-07-25 16:35:31] log.ERROR: Something went Wrong in Email Class - sendUserActivationEmail():A user already exists with login [test@test.com], logins must be unique for users. [] []

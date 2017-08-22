@@ -1,0 +1,1 @@
+[2017-07-14 16:00:00] log.ERROR: Something went Wrong in Email Class - sendUserActivationEmail():Address in mailbox given [] does not comply with RFC 2822, 3.6.2. [] []

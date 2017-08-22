@@ -1,0 +1,4 @@
+﻿index->登入
+server->啟動時導入index頁面
+bootstrap內的檔案為以上2個檔案所用
+assets內的檔案為大部分程式內的排版及設計所用

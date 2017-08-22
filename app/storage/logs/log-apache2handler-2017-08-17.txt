@@ -1,0 +1,1 @@
+[2017-08-17 16:58:12] log.ERROR: Someting Went Wrong in Task Repository - deleteTask():Creating default object from empty value [] []

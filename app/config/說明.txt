@@ -1,0 +1,8 @@
+92five->install需要轉為true installationDate為安裝此系統日期
+app->timezone設定時選擇的時區
+cache->
+database->管理者帳密 主機IP位置
+mail->
+queue->
+session->
+view->
