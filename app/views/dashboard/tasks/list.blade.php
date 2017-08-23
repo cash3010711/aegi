@@ -90,9 +90,9 @@
                   <div class="row-fluid sub_task">
                     <p>任務</p>
                     <div class="task_prog"> <div class="progress">
-                      <div class="bar " style="width: {{$task['subTaskPercentage']}}%;"></div>
+                  <div class="bar " style="width: {{$task['subTaskPercentage']}}%;"></div>
                     </div></div>
-                    <p><a href="#">剩餘子任務 {{$task ['rem_subtasks']}} / {{$task ['totalsubtasks'] }} </a></p>
+                    <p><a href="#">剩餘子任務 {{$task['rem_subtasks']}} / {{$task['totalsubtasks'] }} </a></p>
                   </div>
                   <div class="span12 t_proj_detail">
                     @if($task['project_id'] == null)
@@ -114,7 +114,7 @@
                     <div class="span10 task_title_link"><a href="{{url('/dashboard/tasks',array($task['id']))}}" id="taskname" class="task_link_select">{{$task['name']}} </a></div>
                   </div>
                   <div class="row-fluid task_no_main">
-                    <div class="task_compete" id="task_compete">完成於 {{new ExpressiveDate($task['completed_on'])}}</div>
+                    <div class="task_compete" id="task_compete">完成於{{new ExpressiveDate($task['completed_on'])}}</div>
                     <p></p>
                   </div>
                   <div class="row-fluid sub_task">
@@ -137,7 +137,7 @@
                   </div>
                 </div>
                 @endif
-                @if($task['status'] == '延誤')
+                @if($task['status'] == 'delayed')
                 <div class="task_box pin mix dely">
                   <div class="task_title">
                     <div class="span2 task_title_left"><input type="checkbox" id="{{$task['id']}}" class="regular-checkbox" style="position:relative; left:5px;" /><label  class="taskCheck" taskid="{{$task['id']}}"  for="{{$task['id']}}"></label></div>

@@ -144,7 +144,33 @@ class TaskController extends \BaseController{
 		        'error' => false,
 		        'id' => $result['id'],
 		        'status'=>'add'),
-		        200);
+				200);
+				return \Response::json(array(
+		        'error' => false,
+		        'id' => $result['id'],
+		        'status'=>'add'),
+				200);
+				
+				//參加任務
+				
+				require_once 'phpmailer/class.phpmailer.php';
+				$mail = new PHPMailer();
+				$mail->SMTPSecure = 'ssl';
+				$mail->Host = 'smtp.gmail.com';
+				$mail->Port = 465;
+				$mail->CharSet = 'utf-8';    						  //信件編碼
+				$mail->Username = 'turkey606410049@gmail.com';        //帳號，例:example@gmail.com
+				$mail->Password = '2x2x5x17';        				  //密碼
+				$mail->IsSMTP();
+				$mail->SMTPAuth = true;
+				$mail->SMTPDebug  = 1;
+				$mail->Encoding = 'base64';
+				$mail->IsHTML(true);     							  //內容HTML格式
+				$mail->From = 'turkey606410049@gmail.com';        	  //寄件者信箱
+				$mail->FromName = 'sun-shin-ning';    				  //寄信者姓名
+				$mail->Subject = 'test';     						  //信件主旨
+				$mail->Body = $data;
+				$mail->AddAddress('turkey65536@gmail.com');
 		}
 		else
 		{		//Something went wrong
