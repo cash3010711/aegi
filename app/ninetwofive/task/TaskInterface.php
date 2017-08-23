@@ -16,7 +16,7 @@ interface TaskInterface{
 	//Update status 
 	public function updateStatus($data, $userId);
 	//Add new Task
-	public function addTask($data, $userId);
+	public function addTask($data, $userId, $user_email);
 	//Add New Subtask
 	public function addSubTask($data, $userId);
 	//Delete Sub Task

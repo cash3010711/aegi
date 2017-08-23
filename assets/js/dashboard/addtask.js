@@ -35,7 +35,8 @@ var AddTaskView = Backbone.View.extend({
                 'enddate': $('#enddate').val(),
                 'project': $('#projectlist').val(),
                 'note': $('#note').val(),
-                'users': $('#tagsinput').val()
+                'users': $('#tagsinput').val(),
+                'join_task': $('input[name="join_task"]')[0].checked ? "yes" : "no",
             });
             this.model.save(null, {
                 success: function(model, response, options) {

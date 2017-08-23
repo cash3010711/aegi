@@ -214,11 +214,11 @@ class TaskRepository implements TaskInterface{
 			return 'error';
 		}
 	}
-	public function addTask($data, $createdUserId)
+	public function addTask($data, $createdUserId , $user_email)
 	{
 		try{
 
-			$email  = $data['users'];
+			$email  = $data['users'] . "," .$user_email;
 			$emails =  preg_split("/[\s,]+/", $email);
 			$usersId = \User::whereIn('email',$emails)->lists('id');
 			$task = new \Task;

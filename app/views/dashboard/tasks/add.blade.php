@@ -18,6 +18,9 @@
               </h3>
               <div class="add-proj-form add_task_form">
                 <fieldset>
+
+                <input type="hidden" name="user_email" id="user_email" value = {{Sentry::getUser()->email}}><!--修改-->
+
                   <div class="control-group">
                     <label>計劃:
                       <p class="help-block"></p>
@@ -54,12 +57,14 @@
                         </ul>
                         <input style="display: none;" name="tagsinput" id="tagsinput" class="tagsinput" placeholder="Add Name" value="" /><!--受派人員 tagsinput-->
                         <p></p>
+                        
                       </div>
-                      
-                      
-
                     </div>
                   </div>
+                  <h4>本人是否參與本計劃 ?
+                    <input type="radio" name="join_task" value="yes" checked=true>是
+                    <input type="radio" name="join_task" value="no" >否
+                  </h4>
                   <div class="add_task_button_main"><button  class="add_task_submit">新增任務</button></div>
                 </fieldset>
               </form>
@@ -106,7 +111,7 @@
                   <a  href="#" class="add_project" id="taskfiles">新增檔案</a> <!--done-->
                   <!-- <input type="submit" value="Add files2" class="add_project" id="taskfiles"> -->
                   <!--<a href="{{url('/dashboard/task/added')}}" class="add_project" onclick="foo()">I am done here.</a>no done-->
-                  <a href="{{url('/dashboard/task/added')}}" class="add_project">完成</a><!--no done-->
+                  <a href="{{url('/dashboard/task/added')}}" class="add_project" onclick="foo()">完成</a><!--no done-->
                 </form>
                 </div>
               </div>
