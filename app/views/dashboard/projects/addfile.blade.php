@@ -79,7 +79,6 @@
                           $enddate=urlencode($enddate);
                           $tagsinput=$_POST["tagsinput"];
                           $tagsinput=urlencode($tagsinput);
-                        
                       ?>
                       <input type="hidden" name="project_name" id="project_name" value=<?php echo $project_name;?> />
                       <input type="hidden" name="description" id="description" value=<?php echo $description;?> />

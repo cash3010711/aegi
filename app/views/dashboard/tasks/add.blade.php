@@ -55,6 +55,9 @@
                         <input style="display: none;" name="tagsinput" id="tagsinput" class="tagsinput" placeholder="Add Name" value="" /><!--受派人員 tagsinput-->
                         <p></p>
                       </div>
+                      
+                      
+
                     </div>
                   </div>
                   <div class="add_task_button_main"><button  class="add_task_submit">新增任務</button></div>

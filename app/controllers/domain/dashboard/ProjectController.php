@@ -58,7 +58,14 @@ class ProjectController extends \BaseController{
 			$data = \Input::all();
 			//Get the user id of the currently logged in user
 			$createdUserId = Sentry::getUser()->id;
+			$createdUserEmail = Sentry::getUser()->email;
 			//Add the dat
+
+			//參加計畫
+			if($data['join_project'] == "yes"){
+				$data['tagsinput'] .= ",";
+				$data['tagsinput'] .= $createdUserEmail;
+			}
 			$returnData = $this->project->addProject($data,$createdUserId);
 			return \View::make('dashboard.projects.addfile')
 							->with('parentType', 'Project')

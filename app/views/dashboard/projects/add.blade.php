@@ -60,7 +60,12 @@
                       </ul>
                       <input style="display: none;" name="tagsinput" id="tagsinput" class="tagsinput"  placeholder="Add Name" value="" /><!--參與者 tagsinput-->
                       <p></p>
+                      
                     </div>
+                    <h4>本人是否參與本計劃 ?
+                      <input type="radio" name="join_project" id="join_project" value="yes" checked=true>是
+                      <input type="radio" name="join_project" id="join_project" value="no" >否
+                    </h4>
                   </div>
                 </div>
               </div>
