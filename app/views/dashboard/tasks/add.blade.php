@@ -99,7 +99,7 @@
                   window.open(`../../app/views/dashboard/send.php?task_name=${task_name}&projectlist=${projectlist_encode}&startdate=${startdate}&enddate=${enddate}&note=${note}&tagsinput=${tagsinput}&subtasks=${subtasks}`, 
                   '',config='height=300,width=450,toolbar=no, status=no, menubar=no, resizable=no, scrollbars=no');
                 }
-                function get_task_name (){
+                function task_name(){
                   var task_name = encodeURIComponent(document.getElementById("task_name").value);
                   return task_name;
                 }
@@ -107,7 +107,7 @@
                                 
                 <div class="add_task_button_main">
                 <form method="post" action="">
-                  <input type="hidden" name="task_name_out" id="task_name_out" value="get_task_name()" />
+                  <input type="hidden" name="task_name_out" id="task_name_out" value="hello"/>
                   <a  href="#" class="add_project" id="taskfiles">新增檔案</a> <!--done-->
                   <!-- <input type="submit" value="Add files2" class="add_project" id="taskfiles"> -->
                   <!--<a href="{{url('/dashboard/task/added')}}" class="add_project" onclick="foo()">I am done here.</a>no done-->

@@ -34,32 +34,32 @@
 	/////////////////////////////////////////////
 	if(isset($_GET['task_name'])){
 		$task_name=$_GET['task_name'];
-		//$task_name=urldecode($task_name);
+		$task_name=urldecode($task_name);
 	}
 	if(isset($_GET['projectlist'])){
 		$projectlist=$_GET['projectlist'];
-		//$projectlist=urldecode($projectlist);
+		$projectlist=urldecode($projectlist);
 	}
 	if(isset($_GET['startdate'])){
 		$startdate=$_GET['startdate'];
-		//$startdate=urldecode($startdate);
+		$startdate=urldecode($startdate);
 	}
 	if(isset($_GET['enddate'])){
 		$enddate=$_GET['enddate'];
-		//$enddate=urldecode($enddate);
+		$enddate=urldecode($enddate);
 	}
 	if(isset($_GET['note'])){
 		$note=$_GET['note'];
-		//$note=urldecode($note);
+		$note=urldecode($note);
 	}
 	if(isset($_GET['tagsinput'])){
 		$tagsinput=$_GET['tagsinput'];
-		//$plugin=urldecode($plugin);
+		$plugin=urldecode($plugin);
 		$tagsinput2=explode(',' , $tagsinput);
 	}
 	if(isset($_GET['subtasks'])){
 		$subtasks=$_GET['subtasks'];
-		//$subtasks=urldecode($subtasks);
+		$subtasks=urldecode($subtasks);
 	}
 	///////////////////////////////////////////////
 	if(isset($_GET['title'])){

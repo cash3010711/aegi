@@ -244,15 +244,50 @@ class TaskController extends \BaseController{
 		//Get the user id of the currently logged in user	
 		$userId = Sentry::getUser()->id;
 		//Check Permission
-		$result = $this->tasks->checkPermission($taskId, $userId);
+		$result = $this->tasks->checkPermission($taskId, $userId);		
 		if($result == 'success')
 		{
 			//Authorized
 			$taskName= Task::where('id','=',$taskId)->pluck('name');
+			$task_start_date= Task::where('id','=',$taskId)->pluck('start_date');
+			$task_end_date= Task::where('id','=',$taskId)->pluck('end_date');
+			$task_note= Task::where('id','=',$taskId)->pluck('note');
+
+			$task_project_id=Task::where('id','=',$taskId)->pluck('project_id');	//取得計畫編號
+			$task_project_name= Project::where('id','=',$task_project_id)->pluck('project_name');	//取得計畫名稱
+
+			$task_id=Task::where('id','=',$taskId)->pluck('id');					//取得任務編號
+
+			$subtask_all = "";
+			$subtask_id =\subTask::where('task_id','=',$task_id)->pluck('id');
+			$how_subtask=\subTask::where('task_id','=',$task_id)->count();
+			for($loop=0;$loop<$how_subtask;$loop++){
+				$subtask_name =	\subTask::where('id','=',$subtask_id+$loop)->pluck('text');
+				$subtask_all .= (string)$subtask_name . "," ;//取得子任務名稱(無法復數)			
+			}
+
+			$task_user_id=\Taskcollabs::where('task_id','=',$taskId)->pluck('user_id'); //取得參與者id
+			$task_data_id=\Taskcollabs::where('task_id','=',$taskId)->pluck('id'); //取得參與者id
+			$how_user=\Taskcollabs::where('task_id','=',$taskId)->count();
+			$mail="";
+			for($loop=0;$loop<$how_user;$loop++){
+				$task_user_id = \Taskcollabs::where('id','=',$task_data_id+$loop)->pluck('user_id');
+				$task_user_email = \User::find($task_user_id)->email;
+				$mail .= (string)$task_user_email . ",";
+			}
+
 			return \View::make('dashboard.projects.addfile')
 							->with('parentType', 'Task')
 							->with('parentName', $taskName)
-							->with('parentId', $taskId);
+							->with('parentId', $taskId)
+							//////////////////////
+							->with('task_name', $taskName)
+							->with('projectlist', $task_project_name)
+							->with('startdate', $task_start_date)
+							->with('enddate', $task_end_date)
+							->with('note', $task_note)
+							->with('tagsinput', $mail)
+							->with('subtasks', $subtask_all);
 		}
 		else
 		{

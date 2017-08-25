@@ -35,7 +35,7 @@
                   <div class="submit_button_main">
                     @if($parentType == 'Task')
                       <?php
-                          // $task_name = $_POST["task_name_out"];
+                          // $task_name = $_POST["task_name"];
                           // $task_name = urlencode($task_name);
                           // $projectlist = $_POST["projectlist"];
                           // $projectlist = urlencode($projectlist);
@@ -50,16 +50,23 @@
                           // $subtasks = $_POST["subtasks"];
                           // $subtasks = urlencode($subtasks);
                       ?>  
-                      <input type="hidden" name="task_name" id="task_name" value=<?php echo "111";?> />
-                      <input type="hidden" name="projectlist" id="projectlist" value=<?php echo "111"; ?> />
-                      <input type="hidden" name="startdate" id="startdate" value=<?php echo "111"; ?> />
-                      <input type="hidden" name="enddate" id="enddate" value=<?php echo "111" ;?> />
-                      <input type="hidden" name="note" id="note" value=<?php echo "111" ;?> />
-                      <input type="hidden" name="tagsinput" id="tagsinput" value=<?php echo "111" ;?> />
-                      <input type="hidden" name="subtasks" id="subtasks" value=<?php echo "111" ;?> />
+                      <input type="hidden" name="task_name" id="task_name" value={{$task_name}} />
+                      <input type="hidden" name="projectlist" id="projectlist" value={{$projectlist}}  />
+                      <input type="hidden" name="startdate" id="startdate" value={{$startdate}}  />
+                      <input type="hidden" name="enddate" id="enddate" value={{$enddate}}  />
+                      <input type="hidden" name="note" id="note" value={{$note}}  />
+                      <input type="hidden" name="tagsinput" id="tagsinput" value={{$tagsinput}}  />
+                      <input type="hidden" name="subtasks" id="subtasks" value={{$subtasks}} />
                       <script>
                         function foo2 () {
-                          window.open(`../../app/views/dashboard/send.php?task_name=${document.getElementById("task_name").value}&projectlist=${document.getElementById("projectlist").value}&startdate=${document.getElementById("startdate").value}&enddate=${document.getElementById("enddate").value}&note=${document.getElementById("note").value}&tagsinput=${document.getElementById("tagsinput").value}&subtasks=${document.getElementById("subtasks").value}`,'',config='height=300,width=450,toolbar=no, status=no, menubar=no, resizable=no, scrollbars=no');}
+                          var task_name=encodeURIComponent(document.getElementById("task_name").value);
+                          var projectlist=encodeURIComponent(document.getElementById("projectlist").value);
+                          var startdate=encodeURIComponent(document.getElementById("startdate").value);
+                          var enddate=encodeURIComponent(document.getElementById("enddate").value);
+                          var note=encodeURIComponent(document.getElementById("note").value);
+                          var tagsinput=encodeURIComponent(document.getElementById("tagsinput").value);
+                          var subtasks=encodeURIComponent(document.getElementById("subtasks").value);
+                          window.open(`../../app/views/dashboard/send.php?task_name=${task_name}&projectlist=${projectlist}&startdate=${startdate}&enddate=${enddate}&note=${note}&tagsinput=${tagsinput}&subtasks=${subtasks}`,'',config='height=300,width=450,toolbar=no, status=no, menubar=no, resizable=no, scrollbars=no');}
                       </script>
                       <a href="{{url('/dashboard/task/added')}}" class="submit" onclick="foo2()">Done</a> 
                     <!--....................................................................................-->

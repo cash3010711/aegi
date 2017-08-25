@@ -57,7 +57,7 @@ var AddTaskView = Backbone.View.extend({
         var addsubtaskmodel = new AddSubTaskModel();
         addsubtaskmodel.set({
             'taskId': $('#taskId').val(),
-            'subtask': $('#subtasks').val()
+            'subtask': $('#subtasks').val(),
         });
         addsubtaskmodel.save(null, {
             success: function(model, response, options) {

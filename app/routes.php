@@ -116,8 +116,10 @@ Route::group(array('prefix'=>'dashboard','before'=>'auth'),function()
 				Route::get('Tasks','Controllers\Domain\Dashboard\TaskController@getIndex');
 				Route::get('/tasks/project/{id?}', 'Controllers\Domain\Dashboard\TaskController@getProjectsTasks');
 				Route::get('/tasks/add','Controllers\Domain\Dashboard\TaskController@getAddTasks');
+
 				Route::get('/tasks/add/files/{id?}','Controllers\Domain\Dashboard\TaskController@getAddFiles');
 				Route::post('/tasks/add/files/{id?}','Controllers\Domain\Dashboard\TaskController@postAddFiles');
+
 				Route::get('/tasks/{id?}','Controllers\Domain\Dashboard\TaskController@getViewTask');
 				Route::get('/tasks/edit/{id?}','Controllers\Domain\Dashboard\TaskController@getEditTask');
 				Route::get('/tasks/edit/add/files/{id?}','Controllers\Domain\Dashboard\TaskController@getEditFiles');
@@ -129,6 +131,7 @@ Route::group(array('prefix'=>'dashboard','before'=>'auth'),function()
 				Route::get('/task/edited/{id?}',function($id){
 						return Redirect::to('dashboard/tasks/'.$id)->with('status','success')->with('message','Task Updated');
 				});
+
 				Route::put('task/subtasks/{id?}','Controllers\Domain\Dashboard\TaskController@updateSubTask');
 				/************* Routes for Calendar **************/
 				Route::get('calendar','Controllers\Domain\Dashboard\CalendarController@getIndex');
