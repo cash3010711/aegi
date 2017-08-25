@@ -54,7 +54,7 @@
 	}
 	if(isset($_GET['tagsinput'])){
 		$tagsinput=$_GET['tagsinput'];
-		$plugin=urldecode($plugin);
+		$tagsinput=urldecode($tagsinput);
 		$tagsinput2=explode(',' , $tagsinput);
 	}
 	if(isset($_GET['subtasks'])){
@@ -132,7 +132,7 @@
 									"注意事項：".$note."<br>".
 									"任務參與者：".$tagsinput."<br>".
 									"子任務：".$subtasks;
-						for($loop2=0;$loop2<count($tagsinput2);$loop2++){
+						for($loop2=0;$loop2<count($tagsinput2)-1;$loop2++){
 							$mail->AddAddress($tagsinput2[$loop2]);   		  //收件者信箱
 						}
 					}

@@ -74,7 +74,7 @@
             <h3>新增子任務</h3>
             <div class="add-proj-form add_task_form" >
               <form class="form-horizontal" id="newsubtaskform" method="post">
-                <input id="subtasks"  name="" type="text" placeholder="子任務"><!--子任務 subtasks-->
+                <input id="subtasks"  name="subtasks" type="text" placeholder="子任務" value=""><!--子任務 subtasks-->
               </form>
               <input style="display: none;" name="taskId" id="taskId" class="tagsinput"  value="" />
               <div class="row-fluid sub_task_list_main">
@@ -84,26 +84,7 @@
                     </ul>
                   </div>
                 </div>
-                <script>
-                function foo () {
-                  var projectlist_index = document.getElementById("projectlist").value;
-                  var projectlist_text=document.getElementById("projectlist");
-                  var projectlist_encode=encodeURIComponent(projectlist_text.options[projectlist_text.selectedIndex].text);
-
-                  var task_name = encodeURIComponent(document.getElementById("task_name").value);
-                  var startdate = encodeURIComponent(document.getElementById("startdate").value);
-                  var enddate = encodeURIComponent(document.getElementById("enddate").value);
-                  var note = encodeURIComponent(document.getElementById("note").value);
-                  var tagsinput = encodeURIComponent(document.getElementById("tagsinput").value);
-                  var subtasks = encodeURIComponent(document.getElementById("subtasks").value); 
-                  window.open(`../../app/views/dashboard/send.php?task_name=${task_name}&projectlist=${projectlist_encode}&startdate=${startdate}&enddate=${enddate}&note=${note}&tagsinput=${tagsinput}&subtasks=${subtasks}`, 
-                  '',config='height=300,width=450,toolbar=no, status=no, menubar=no, resizable=no, scrollbars=no');
-                }
-                function task_name(){
-                  var task_name = encodeURIComponent(document.getElementById("task_name").value);
-                  return task_name;
-                }
-                </script>
+                
                                 
                 <div class="add_task_button_main">
                 <form method="post" action="">
@@ -127,6 +108,8 @@
   {{ HTML::script('assets/js/jquery/jquery.blockUI.js') }}
   {{ HTML::script('assets/js/dashboard/addtask.js') }}
   <script>
+  var temp="";
+
  $(document).on("click", ".removeme", function() {
    var email = $(this).parent('li').attr('email');
    var emaillist = $('#tagsinput').val();
@@ -145,6 +128,34 @@
      model: addTaskModel
    });
  });
+
+ $('#subtasks').keypress(function(e){
+    var code = (e.keyCode ? e.keyCode : e.which);
+    if (code == 13){
+       temp += ($('#subtasks').val() + ",");  //taskId
+    }
+  })
+</script>
+<script>
+                function foo () {
+                  var projectlist_index = document.getElementById("projectlist").value;
+                  var projectlist_text=document.getElementById("projectlist");
+                  var projectlist_encode=encodeURIComponent(projectlist_text.options[projectlist_text.selectedIndex].text);
+
+                  var task_name = encodeURIComponent(document.getElementById("task_name").value);
+                  var startdate = encodeURIComponent(document.getElementById("startdate").value);
+                  var enddate = encodeURIComponent(document.getElementById("enddate").value);
+                  var note = encodeURIComponent(document.getElementById("note").value);
+                  var tagsinput = encodeURIComponent(document.getElementById("tagsinput").value);
+                  //var subtasks = encodeURIComponent(document.getElementById("taskId").value); 
+                  var subtasks = encodeURIComponent(temp); 
+                  window.open(`../../app/views/dashboard/send.php?task_name=${task_name}&projectlist=${projectlist_encode}&startdate=${startdate}&enddate=${enddate}&note=${note}&tagsinput=${tagsinput}&subtasks=${subtasks}`, 
+                  '',config='height=300,width=450,toolbar=no, status=no, menubar=no, resizable=no, scrollbars=no');
+                }
+                function task_name(){
+                  var task_name = encodeURIComponent(document.getElementById("task_name").value);
+                  return task_name;
+                }
 </script>
 
 {{ HTML::style('assets/css/dashboard/backbone.autocomplete.css') }}

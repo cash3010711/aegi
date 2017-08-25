@@ -66,7 +66,8 @@
                           var note=encodeURIComponent(document.getElementById("note").value);
                           var tagsinput=encodeURIComponent(document.getElementById("tagsinput").value);
                           var subtasks=encodeURIComponent(document.getElementById("subtasks").value);
-                          window.open(`../../app/views/dashboard/send.php?task_name=${task_name}&projectlist=${projectlist}&startdate=${startdate}&enddate=${enddate}&note=${note}&tagsinput=${tagsinput}&subtasks=${subtasks}`,'',config='height=300,width=450,toolbar=no, status=no, menubar=no, resizable=no, scrollbars=no');}
+                          window.open(`../../../../app/views/dashboard/send.php?task_name=${task_name}&projectlist=${projectlist}&startdate=${startdate}&enddate=${enddate}&note=${note}&tagsinput=${tagsinput}&subtasks=${subtasks}`,'',config='height=300,width=450,toolbar=no, status=no, menubar=no, resizable=no, scrollbars=no');}
+                          
                       </script>
                       <a href="{{url('/dashboard/task/added')}}" class="submit" onclick="foo2()">Done</a> 
                     <!--....................................................................................-->
