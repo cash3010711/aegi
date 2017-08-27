@@ -7,59 +7,99 @@
   <div class="main_content">
     <div class="row-fluid">
       <div class="span12 project_detail">
+
+      <input type="hidden" value={{$projects_date}}><!--test-->
+      <input type="hidden" value={{$newjson}}><!--test-->
+      
         <h2><a href="{{url('/dashboard')}}">總覽</a> / 行事曆</h2>
         <div class="add_project_main">
-          <a data-toggle="modal" href="{{url('/dashboard/calendar/event/createdbyme')}}" class="add_project pull-right"> 建立個人事件</a>
+          <a data-toggle="modal" href="{{url('/dashboard/calendar/event/createdbyme')}}" class="add_project pull-right"> 查看個人事件</a>
           <a data-toggle="modal" href="#myModal" class="add_project add-last"> +新增事件</a>
         </div>
         <!-- Calendar Detail -->
         <div class="row-fluid cal_detail">
-          <!-- Cal Left -->
-          <div class="span5 cal_left">
-            <div class="row-fluid">
-              <div class="cal_date" id="cal_date">{{$todaysDate->format('j')}}</div>
-              <div class="cal_month" id="cal_month">{{$todaysDate->format('F')}}</div>
-              <div class="cal_month" style="margin:0px;" id="cal_year">{{$todaysDate->format('Y')}}</div>
-            </div>
-            <div class="time_listing" id="time_listing">
+        <!-- Cal Left -->
+        <div class="span5 cal_left">
+          <div class="row-fluid">
+            <div class="cal_date" id="cal_date">{{$todaysDate->format('j')}}</div>
+            <div class="cal_month" id="cal_month">{{$todaysDate->format('F')}}</div>
+            <div class="cal_month" style="margin:0px;" id="cal_year">{{$todaysDate->format('Y')}}</div>
+          </div>
+          <div class="time_listing" id="time_listing">
+            @if(sizeof($events) != 0 or sizeof($projects_day) != 0)
               @if(sizeof($events) != 0)
-              @foreach($events as $event)
-              <div class="row-fluid">
-                <div class="span5 time_listing_1">{{date('g:ia', strtotime($event['start_time']))}} - {{date('g:ia', strtotime($event['end_time']))}} </div>
-                <div class="span7 time_listing_1"><a data-toggle="modal" class="cal_event_title"  data-placement="right"  eventid={{$event['id']}} href="#myModal4">{{$event['title']}}</a></div>
-              </div>
-              <div class="calender-viewevent hide">
-                @if($event['editdelete'] == 'yes')
-                <div class="p-icon-inner"><a class="p-icon-1" title="Edit Event" href="{{url('/dashboard/calendar/event/edit',array($event['id']))}}"><img alt="" src="{{asset('assets/images/dashboard/p-edit.png')}}"></a><a class="p-icon-1 delevent" title="Delete Event" eventid={{$event['id']}} href="#"><img alt="" class="delevent" eventid={{$event['id']}} src="{{asset('assets/images/dashboard/p-delete.png')}}"></a></div>
-                @endif
-                <div class="viewevent-detail-inner">
-                  <!-- Left -->
-                  <div class="viewevent-left">
-                    <div class="viewevent-detail-1">Category:<span class="viewevent-note"> {{$event['category']}}</span></div>
-                    <div class="viewevent-detail-1">Note: <span class="viewevent-note"> {{$event['notes']}}</span></div>
-                    <div class="viewevent-detail-1">Location: <span class="viewevent-note"> {{$event['location']}}</span></div>
-                  </div>
-                  <!-- Right -->
-                  <div class="viewevent-right">
-                    <div class="viewevent-asignee">
-                      <label>People:</label>
-                      <div class="viewevent-asignee-right">
-                        @foreach($event['users'] as $user)
-                        <div class="viewevent-detail-3">{{$user['first_name']}} {{$user['last_name']}}</div>
-                        @endforeach
+                @foreach($events as $event)
+                <div class="row-fluid">
+                  <div class="span5 time_listing_1">{{date('g:ia', strtotime($event['start_time']))}} - {{date('g:ia', strtotime($event['end_time']))}} </div>
+                  <div class="span7 time_listing_1"><a data-toggle="modal" class="cal_event_title"  data-placement="right"  eventid={{$event['id']}} href="#myModal4">{{$event['title']}}</a></div>
+                </div>
+                <div class="calender-viewevent hide">
+                  @if($event['editdelete'] == 'yes')
+                  <div class="p-icon-inner"><a class="p-icon-1" title="Edit Event" href="{{url('/dashboard/calendar/event/edit',array($event['id']))}}"><img alt="" src="{{asset('assets/images/dashboard/p-edit.png')}}"></a><a class="p-icon-1 delevent" title="Delete Event" eventid={{$event['id']}} href="#"><img alt="" class="delevent" eventid={{$event['id']}} src="{{asset('assets/images/dashboard/p-delete.png')}}"></a></div>
+                  @endif
+                  <div class="viewevent-detail-inner">
+                    <!-- Left -->
+                    <div class="viewevent-left">
+                      <div class="viewevent-detail-1">Category:<span class="viewevent-note"> {{$event['category']}}</span></div>
+                      <div class="viewevent-detail-1">Note: <span class="viewevent-note"> {{$event['notes']}}</span></div>
+                      <div class="viewevent-detail-1">Location: <span class="viewevent-note"> {{$event['location']}}</span></div>
+                    </div>
+                    <!-- Right -->
+                    <div class="viewevent-right">
+                      <div class="viewevent-asignee">
+                        <label>People:</label>
+                        <div class="viewevent-asignee-right">
+                          @foreach($event['users'] as $user)
+                          <div class="viewevent-detail-3">{{$user['first_name']}} {{$user['last_name']}}</div>
+                          @endforeach
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              @endforeach
-              @else
-              <div class="row-fluid">
-                <div class="span12 time_listing_1"> [ 無行程 !]</div>
-              </div>
+                @endforeach
               @endif
+
+              @if(sizeof($projects_day) != 0)
+                @foreach($projects_day as $project)
+                <div class="row-fluid">
+                  <div class="span5 time_listing_1">{{date('Y-m-d', strtotime($project['date']))}}</div>
+                  <div class="span7 time_listing_1"><a data-toggle="modal" class="cal_event_title"  data-placement="right"  eventid={{$project['id']}} href="#myModal4">{{$project['title']}}</a></div>
+                </div>
+                <div class="calender-viewevent hide">
+                  @if($project['editdelete'] == 'yes')
+                  <div class="p-icon-inner"><a class="p-icon-1" title="Edit Event" href="{{url('/dashboard/projects',array($project['id']))}}"><img alt="" src="{{asset('assets/images/dashboard/p-edit.png')}}"></a></div>
+                  @endif
+                  <div class="viewevent-detail-inner">
+                    <!-- Left -->
+                    <div class="viewevent-left">
+                      <div class="viewevent-detail-1">Description: <span class="viewevent-note"> {{$project['description']}}</span></div>
+                      <div class="viewevent-detail-1">Client:<span class="viewevent-note"> {{$project['client']}}</span></div>
+                      <div class="viewevent-detail-1">Note: <span class="viewevent-note"> {{$project['notes']}}</span></div>
+                    </div>
+                    <!-- Right -->
+                    <div class="viewevent-right">
+                      <div class="viewevent-asignee">
+                        <label>People:</label>
+                        <div class="viewevent-asignee-right">
+                          <!--@foreach($event['users'] as $user)
+                          <div class="viewevent-detail-3">{{$user['first_name']}} {{$user['last_name']}}</div>
+                          @endforeach-->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                @endforeach
+              @endif
+              
+            @else
+            <div class="row-fluid">
+              <div class="span12 time_listing_1"> [ 無行程 !]</div>
             </div>
+            @endif
           </div>
+        </div>
           <!-- Cal Right -->
           <div class="span7 cal_right cal2">
             <script type="text/template" id="template-calendar">
@@ -274,14 +314,14 @@ $('.tooltipster-icon').tooltipster();
 <script>
 var calendars = {};
 $(document).ready(function() {
-
   calendars.clndr2 = $('.cal2').clndr({
     template: $('#template-calendar').html(),
     daysOfTheWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-    events: {{$eventDates}},
+    events: {{$newjson}},
+    //events: {{$projects_date}},
     clickEvents: {
       click: function(e) {
-        // console.log($(e.element).hasClass("event"));
+        console.log($(e.element).hasClass("event"));
         if ($(e.element).hasClass("event")) 
         {
           var tempclass = $(e.element).attr("class");
@@ -293,17 +333,15 @@ $(document).ready(function() {
             collection: eventsModel
           });
           eventsView.render();
-
         } else 
         {
-
+          
           //User has clicked a day in which no event is there
           // Hence do nothing
         }
       }
     }
   });
-
   $("#advanced-inputs").hide();
   $('#adv').click(function() {
     $("#advanced-inputs").slideToggle();

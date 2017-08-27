@@ -8,7 +8,7 @@
   <div class="main_content">
     <div class="row-fluid">
       <div class="span12 project_detail">
-        <h2><a href="{{url('/dashboard')}}">總覽</a> / <a href="{{url('/dashboard/calendar')}}">行事曆</a> / 建立個人事件</h2>
+        <h2><a href="{{url('/dashboard')}}">總覽</a> / <a href="{{url('/dashboard/calendar')}}">行事曆</a> / 查看個人事件</h2>
         @if($events != null)
         <div class="view_proj_sec">
           @foreach($events as $event)

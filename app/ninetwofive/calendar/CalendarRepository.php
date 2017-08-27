@@ -88,6 +88,47 @@ class CalendarRepository implements CalendarInterface{
 			throw new \SomeThingWentWrongException();
 		}
 	}
+	
+	public function getProjects($userId, $day)
+	{
+		try
+		{	
+			$finalprojects = array();
+			$projectsId = \ProjectUser::where('user_id',$userId)->lists('project_id');
+			if(sizeof($projectsId) != 0)
+			{
+			$projects = \Projects::whereIn('id',$projectsId)->where('start_date',$day)->orderBy('updated_at','desc')->get(array('id','project_name','project_client','description','note','status','folder','deleted','deleted_at','deleted_by','completed_on','mark_completed_by','created_at',''))->toArray();
+			foreach ($projects as $project) {
+				
+				$users = \Projects::find($project['id'])->users()->orderBy('first_name')->get()->toArray();
+				$project['users'] = $users;
+				if($project['updated_by'] == $userId)
+				{
+					$project['editdelete'] = "yes";
+				}
+				else
+				{
+					$project['editdelete'] = "no";
+				}
+				//Log::info($eventusers[0]['first_name']);
+				$finalprojects[] = $project;
+			}
+
+			//Log::info(json_encode($finalevents));	
+			return $finalprojects;
+			}
+			else
+			{
+				return null;
+			}
+		}
+		catch(Exception $e)
+		{
+			\Log::error("Somethin Went Wrong in Calendar Repository - getEvents():".$e->getMessage());
+			throw new \SomeThingWentWrongException();
+		}
+	}
+
 	public function checkPermission($eventId,$userId)
 	{
 		try

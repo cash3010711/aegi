@@ -93,6 +93,7 @@ Route::group(array('prefix'=>'dashboard','before'=>'auth'),function()
 				Route::get('roles',function(){
 					return View::make('dashboard.roles');
 				});
+				/****************project******************/
 				Route::get('projects','Controllers\Domain\Dashboard\ProjectController@getIndex');
 				Route::get('Projects','Controllers\Domain\Dashboard\ProjectController@getIndex');
 				Route::get('projects/{id}','Controllers\Domain\Dashboard\ProjectController@getViewProject')->where('id', '[0-9]+');
@@ -106,6 +107,7 @@ Route::group(array('prefix'=>'dashboard','before'=>'auth'),function()
 				Route::post('projects/add','Controllers\Domain\Dashboard\ProjectController@postCreateProject');
 				Route::post('projects/add/files','Controllers\Domain\Dashboard\ProjectController@postAddFiles');
 				Route::get('projects/add/done',function(){
+					
 					return Redirect::to('dashboard/projects')->with('status','success')->with('message','Project Added');
 				});
 				Route::get('projects/edit/done/{id?}',function($id){

@@ -13,6 +13,10 @@ interface CalendarInterface{
 		public function addEvent($data,$createdUserId);
 		//Get event for a particular date for the user with UserId
 		public function getEvents($userId, $day);
+
+		//Get project for a particular date for the user with UserId
+		public function getProjects($userId, $day);
+		
 		//Get all the event date for the user
 		public function getEventDates($userId);
 		//Get the event 
@@ -25,4 +29,5 @@ interface CalendarInterface{
 		public function checkPermission($eventId,$userId);
 		//Get All Events created by specific user
 		public function getEventsCreatedByUser($userId);
+		
 }
