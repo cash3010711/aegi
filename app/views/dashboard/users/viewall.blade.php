@@ -3,7 +3,6 @@
 <title>92five app - All Users</title>
 @stop
 @section('content')
-
 <div id="contentwrapper">
   <div class="main_content">
     <div class="row-fluid">
@@ -26,16 +25,39 @@
               <div class="viewuser_detail_1">
                 <div class="viewuser_no">{{$user['id']}}</div>
                 <div class="changedeleteusers">
+                  <input type="hidden" value ="{{$role}}">
+                  @if( (($user['role'] != 'admin' and $user['role'] != 'ganaral_manager') or $user['id'] == $userid) or $role == 'admin')
                   <a class="user_edit" href="{{url('dashboard/admin/users/changepassword',array($user['id']))}}">密碼更改</a>
                   <a class="user_delete" userid="{{$user['id']}}" href="#">刪除</a>
+                  @endif
                 </div>
               </div>
-              <div class="viewuser_email"><a href="{{url('/dashboard/admin/users/changename',array($user['id']))}}" class="p-icon-2" title="Change Email"><h3>{{$user['last_name']}}</h3><img src="{{asset('assets/images/dashboard/p-edit.png')}}" height="15px" width="15px" alt=""></a></div>
-              <div class="viewuser_email">{{$user['email']}} <a href="{{url('/dashboard/admin/users/changeemail',array($user['id']))}}" class="p-icon-2" title="Change Email"><img src="{{asset('assets/images/dashboard/p-edit.png')}}" height="15px" width="15px" alt=""></a></div>
-              <div class="viewuser_email">{{$user['role']}}<a href="{{url('dashboard/admin/users/roles',array($user['id']))}}" class="p-icon-2" title="Change Role"><img src="{{asset('assets/images/dashboard/p-edit.png')}}" height="15px" width="15px" alt=""></a></div>
+
+              <div class="viewuser_email"><h3>{{$user['last_name']}}  
+              @if( (($user['role'] != 'admin' and $user['role'] != 'ganaral_manager') or $user['id'] == $userid) or $role == 'admin')
+              <a href="{{url('/dashboard/admin/users/changename',array($user['id']))}}" class="p-icon-2" title="Change Email">
+              <img src="{{asset('assets/images/dashboard/p-edit.png')}}" height="15px" width="15px" alt=""></a>
+              @endif
+              </h3></div>
+              <div class="viewuser_email">{{$user['email']}}
+              @if( (($user['role'] != 'admin' and $user['role'] != 'ganaral_manager') or $user['id'] == $userid) or $role == 'admin') 
+              <a href="{{url('/dashboard/admin/users/changeemail',array($user['id']))}}" class="p-icon-2" title="Change Email">
+              <img src="{{asset('assets/images/dashboard/p-edit.png')}}" height="15px" width="15px" alt=""></a>
+              @endif
+              </div>
+              <div class="viewuser_email">{{$user['role']}}
+              @if( (($user['role'] != 'admin' and $user['role'] != 'ganaral_manager') or $user['id'] == $userid) or $role == 'admin')
+              <a href="{{url('dashboard/admin/users/roles',array($user['id']))}}" class="p-icon-2" title="Change Role">
+              <img src="{{asset('assets/images/dashboard/p-edit.png')}}" height="15px" width="15px" alt=""></a>
+              @endif
+              </div>
+              
               <div class="row-fluid viewuser_detail_2">
                 <!-- Left -->
+                <!--須追加使當前使用者為admin-->
+                @if( (($user['role'] != 'admin' and $user['role'] != 'ganaral_manager') or $user['id'] == $userid) or $role == 'admin') 
                 <div class="span6 viewuser_left">
+                
                   <div class="viewuser_active">
                     <div class="viewuser_active_title">
                       <span>Activated:</span>
@@ -77,7 +99,9 @@
                     <p>The user is not banned.</p>
                     @endif
                   </div>
+                  
                 </div>
+                @endif
                 <!-- Right -->
                 <div class="span6 viewuser_right">
                   <p>Login atempts: {{$user['loginAttempt']}}</p>

@@ -31,7 +31,7 @@
             </div>
           </div>
           <div id="side_accordion" class="accordion">
-            @if(Sentry::getUser()->inGroup(Sentry::getGroupProvider()->findByName('admin')))
+            @if(Sentry::getUser()->inGroup(Sentry::getGroupProvider()->findByName('admin')) or Sentry::getUser()->inGroup(Sentry::getGroupProvider()->findByName('ganaral_manager')))
             <div class="accordion-group bdr_none1">
               <div class="accordion-heading none_accrodion"> <a href="{{url('/dashboard/admin')}}"> <span class="accrod_icon"><img src="{{asset('assets/images/dashboard/users.png')}}" alt=""></span>系統管理員 </a> </div>
             </div>

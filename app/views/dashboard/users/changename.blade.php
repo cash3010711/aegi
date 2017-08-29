@@ -9,6 +9,9 @@
       <div class="span12 project_detail">
         <h2><a href="{{url('/dashboard')}}">Dashboard</a> / {{$breadCrumb}}</h2>
         <div class="row-fluid change_email">
+          @if(Sentry::getUser()->inGroup(Sentry::getGroupProvider()->findByName('ganaral_manager')) and $can_change)
+            <h1><center>您無權更改此使用者姓名</center></h1>
+          @else
           <form method='post' id="emailForm"  data-validate="parsley" >
             <h3>Change name</h3>
             <div class="change_email_inner">
@@ -39,6 +42,7 @@
               </div>
             </div>
           </form>
+          @endif
         </div>
       </div>
     </div>

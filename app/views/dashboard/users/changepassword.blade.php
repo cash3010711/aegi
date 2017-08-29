@@ -10,6 +10,9 @@
       <div class="span12 project_detail">
         <h2><a href="{{url('/dashboard')}}">Dashboard</a> / {{$breadCrumb}}</h2>
         <div class="row-fluid change_email">
+          @if(Sentry::getUser()->inGroup(Sentry::getGroupProvider()->findByName('ganaral_manager')) and $can_change)
+              <h1><center>您無權更改此使用者密碼</center></h1>
+          @else
           <h3>Change Password</h3>
           <div class="change_email_inner">
             <div class="row-fluid">
@@ -39,6 +42,7 @@
               </form>
             </div>
           </div>
+          @endif
         </div>
       </div>
     </div>

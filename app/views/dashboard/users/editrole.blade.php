@@ -10,6 +10,9 @@
         <h2><a href="{{url('/dashboard')}}">Dashboard</a>/ <a href="{{url('/dashboard/admin')}}">Admin</a>/ <a href="{{url('/dashboard/admin/users')}}">Users</a>/ Edit Role</h2>
         <div class="row-fluid change_email">
           <form class="form-horizontal" method="post" action="{{url('/dashboard/admin/users/roles')}}" data-validate="parsley">
+            @if(Sentry::getUser()->inGroup(Sentry::getGroupProvider()->findByName('ganaral_manager')) and $user['can_change'])
+              <h1><center>您無權更改此使用者權限</center></h1>
+            @else
             <div class="adduser_sec">
               <p> Change role for {{$user['first_name']}} {{$user['last_name']}} from {{$user['role']}} to </p>
               <div class="email_detail_2">
@@ -21,7 +24,10 @@
                     <option  name="" value="user" title="">User</option>
                     <option  name="" value="leader" title="">Leader</option>
                     <option  name="" value="manager" title="" >Manager</option>
+                    @if(Sentry::getUser()->inGroup(Sentry::getGroupProvider()->findByName('admin')))
+                    <option  name="" value="ganaral_manager" title="">Ganaral_manager</option>
                     <option  name="" value="admin" title="">Admin</option>
+                    @endif
                   </select>
                 </div>
                 <div class="span4">
@@ -29,6 +35,7 @@
                 </div>
               </div>
             </div>
+            @endif
           </form>
         </div>
       </div>

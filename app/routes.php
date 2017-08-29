@@ -212,6 +212,41 @@ Route::group(array('prefix'=>'dashboard','before'=>'auth'),function()
 				 	Route::post('/data/restore','Controllers\Domain\Admin\DataController@restoreSingleEntity');
 
 				});
+				/////////////////////////
+				Route::group(array('prefix'=>'admin','before'=>'ganaral_manager'),function() 
+				{
+					Route::get('/', 'Controllers\Domain\Admin\AdminController@getIndex');
+					Route::get('users', 'Controllers\Domain\Admin\UserController@getAllUsers');
+					Route::get('users/add', 'Controllers\Domain\Admin\UserController@getAddUser');
+					Route::post('users/add', 'Controllers\Domain\Admin\UserController@postAddUser');
+ 					if(Request::ajax())
+				 	{
+				 		Route::put('/users/manage/{id?}','Controllers\Domain\Admin\UserController@manageUsers');
+				 	}
+				 	Route::get('/users/roles/{id?}','Controllers\Domain\Admin\UserController@getChangeRole');
+				 	Route::post('/users/roles','Controllers\Domain\Admin\UserController@postChangeRole');
+				 	Route::post('/users/delete','Controllers\Domain\Admin\UserController@deleteUser');
+				 	Route::get('/settings','Controllers\Domain\Admin\AdminController@getEmailSettings');
+				 	Route::post('/settings','Controllers\Domain\Admin\AdminController@postEmailSettings');
+				 	Route::get('/users/add/withdetails','Controllers\Domain\Admin\UserController@getAddUserWithDetails');
+					 Route::post('/users/add/withdetails','Controllers\Domain\Admin\UserController@postAddUserWithDetails');
+					 
+				 	Route::get('/users/changeemail/{id?}','Controllers\Domain\Admin\UserController@getChangeEmail');
+				 	Route::post('/users/changeemail/{id?}','Controllers\Domain\Admin\UserController@postChangeEmail');
+				 	Route::get('/users/changepassword/{id?}','Controllers\Domain\Admin\UserController@getChangePassword');
+					Route::post('/users/changepassword/{id?}','Controllers\Domain\Admin\UserController@postChangePassword');
+
+					Route::get('/users/changename/{id?}','Controllers\Domain\Admin\UserController@getChangename');
+					Route::post('/users/changename/{id?}','Controllers\Domain\Admin\UserController@postChangename');
+					
+				 	Route::post('/deleterestore','Controllers\Domain\Admin\DataController@getIndex');
+				 	Route::post('/data/deleteall/{type?}','Controllers\Domain\Admin\DataController@deleteAll');
+				 	Route::post('/data/delete','Controllers\Domain\Admin\DataController@deleteSingleEntity');
+				 	Route::post('/data/restoreall/{type?}','Controllers\Domain\Admin\DataController@restoreAll');
+				 	Route::post('/data/restore','Controllers\Domain\Admin\DataController@restoreSingleEntity');
+
+				});
+				/////////////////////////
                 Route::get('credits',function(){
                     return View::make('dashboard.credits');
                 });

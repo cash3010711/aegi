@@ -17,7 +17,7 @@
                 <div class="task_select span4">
                   <select name="role" class="global_select" id="role" tabindex="1">
                     <option  name="" value="user" title="">一般使用者</option>
-                    <option  name="" value="leader" title="">領導者</option>
+                    <option  name="" value="leader" title="">主管</option>
                     <option  name="" value="manager" title="" >經理</option>
                   </select>
                 </div>

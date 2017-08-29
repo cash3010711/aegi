@@ -59,32 +59,31 @@
                 </div>
                 @endforeach
               @endif
-
-              @if(sizeof($projects_day) != 0)
+              <@if(sizeof($projects_day) != 0)
                 @foreach($projects_day as $project)
                 <div class="row-fluid">
                   <div class="span5 time_listing_1">{{date('Y-m-d', strtotime($project['date']))}}</div>
-                  <div class="span7 time_listing_1"><a data-toggle="modal" class="cal_event_title"  data-placement="right"  eventid={{$project['id']}} href="#myModal4">{{$project['title']}}</a></div>
+                  <div class="span7 time_listing_1"><a data-toggle="modal" class="cal_event_title"  data-placement="right"  eventid={{$project['id']}} href="#myModal4">{{$project['project_name']}}</a></div>
                 </div>
                 <div class="calender-viewevent hide">
                   @if($project['editdelete'] == 'yes')
                   <div class="p-icon-inner"><a class="p-icon-1" title="Edit Event" href="{{url('/dashboard/projects',array($project['id']))}}"><img alt="" src="{{asset('assets/images/dashboard/p-edit.png')}}"></a></div>
                   @endif
                   <div class="viewevent-detail-inner">
-                    <!-- Left -->
+                    <!--Left--> 
                     <div class="viewevent-left">
                       <div class="viewevent-detail-1">Description: <span class="viewevent-note"> {{$project['description']}}</span></div>
                       <div class="viewevent-detail-1">Client:<span class="viewevent-note"> {{$project['client']}}</span></div>
                       <div class="viewevent-detail-1">Note: <span class="viewevent-note"> {{$project['notes']}}</span></div>
                     </div>
-                    <!-- Right -->
+                    <!-- Right --> 
                     <div class="viewevent-right">
                       <div class="viewevent-asignee">
                         <label>People:</label>
                         <div class="viewevent-asignee-right">
-                          <!--@foreach($event['users'] as $user)
+                          @foreach($event['users'] as $user)
                           <div class="viewevent-detail-3">{{$user['first_name']}} {{$user['last_name']}}</div>
-                          @endforeach-->
+                          @endforeach
                         </div>
                       </div>
                     </div>
@@ -92,8 +91,8 @@
                 </div>
                 @endforeach
               @endif
-              
             @else
+            
             <div class="row-fluid">
               <div class="span12 time_listing_1"> [ 無行程 !]</div>
             </div>

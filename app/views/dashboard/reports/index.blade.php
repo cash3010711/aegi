@@ -32,7 +32,7 @@
             <h3>計劃回報</h3>
             <div class="report-image"><a  data-toggle="modal" href="#myModal-projectreport"><img src="{{asset('assets/images/reports/project_report_icon.png')}}" alt=""></a></div>
           </div>
-          @if(Sentry::getUser()->inGroup(Sentry::getGroupProvider()->findByName('admin')) or Sentry::getUser()->inGroup(Sentry::getGroupProvider()->findByName('manager')) or Sentry::getUser()->inGroup(Sentry::getGroupProvider()->findByName('leader')) )
+          @if(Sentry::getUser()->inGroup(Sentry::getGroupProvider()->findByName('admin')) or Sentry::getUser()->inGroup(Sentry::getGroupProvider()->findByName('manager')) or Sentry::getUser()->inGroup(Sentry::getGroupProvider()->findByName('leader')) or Sentry::getUser()->inGroup(Sentry::getGroupProvider()->findByName('ganaral_manager')))
           <div class="span3 report-box">
             <h3>人員回報</h3>
             <div class="report-image"><a  data-toggle="modal" href="#myModal-monthlyuserproject"><img src="{{asset('assets/images/reports/userreport.png')}}" alt=""></a></div>

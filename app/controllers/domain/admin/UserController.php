@@ -23,9 +23,20 @@ class UserController extends \BaseController{
     public function getAllUsers()
     {
         //Get all data
+        $userID =  \Sentry::getUser()->id;
+
         $data = $this->user->getAllUsersData();
+        $role;
+
+        foreach($data as $user){
+            if($user['id'] == $userID){
+                $role = $user['role'];
+            }
+        }
         return \View::make('dashboard.users.viewall')
-                        ->with('data',$data);
+                        ->with('data',$data)
+                        ->with('role',$role)
+                        ->with('userid',$userID);
     }
     /**
      * Generate View for Add user
@@ -88,6 +99,13 @@ class UserController extends \BaseController{
     public function getChangeRole($userId)
     {
         $result = $this->user->getChangeRole($userId);
+        
+            if($result['role'] == 'admin' || $result['role'] == 'ganaral_manager'){
+                $result['can_change'] = true;
+            }else{
+                $result['can_change'] = false;
+            }
+        
         return \View::make('dashboard.users.editrole')
                     ->with('user',$result);
     }
@@ -175,18 +193,27 @@ class UserController extends \BaseController{
      */
     public function getChangename($userId)
     {
+        $result = $this->user->getChangeRole($userId);
+        
+        if($result['role'] == 'admin' || $result['role'] == 'ganaral_manager'){
+            $can_change = true;
+        }else{
+            $can_change = false;
+        }
+
         //Find User
         $user = \User::find($userId);
         //Get old email
         $first_name = $user->first_name;
         $last_name = $user->last_name;
-         $breadCrumb = '<a href='.url('dashboard/admin').'>Admin</a> / <a href='.url('dashboard/admin/users').'>Users</a> / Change name' ;
+        $breadCrumb = '<a href='.url('dashboard/admin').'>Admin</a> / <a href='.url('dashboard/admin/users').'>Users</a> / Change name' ;
         return \View::make('dashboard.users.changename')
                         ->with('userId',$userId)
                         ->with('oldfirst',$first_name)
                         ->with('oldlast',$last_name)
                         ->with('showNote',false)
-                        ->with('breadCrumb',$breadCrumb);
+                        ->with('breadCrumb',$breadCrumb)
+                        ->with('can_change',$can_change);
     }
     /**
      * Update User's Email
@@ -216,6 +243,13 @@ class UserController extends \BaseController{
      */
     public function getChangeEmail($userId)
     {
+        $result = $this->user->getChangeRole($userId);
+        
+        if($result['role'] == 'admin' || $result['role'] == 'ganaral_manager'){
+            $can_change = true;
+        }else{
+            $can_change = false;
+        }
         //Find User
         $user = \User::find($userId);
         //Get old email
@@ -225,7 +259,8 @@ class UserController extends \BaseController{
                         ->with('userId',$userId)
                         ->with('oldEmail',$email)
                         ->with('showNote',false)
-                        ->with('breadCrumb',$breadCrumb);
+                        ->with('breadCrumb',$breadCrumb)
+                        ->with('can_change',$can_change);
     }
     /**
      * Update User's Email
@@ -254,11 +289,20 @@ class UserController extends \BaseController{
      */
     public function getChangePassword($userId)
     {
+        $result = $this->user->getChangeRole($userId);
+        
+        if($result['role'] == 'admin' || $result['role'] == 'ganaral_manager'){
+            $can_change = true;
+        }else{
+            $can_change = false;
+        }
+
         $breadCrumb = '<a href='.url('dashboard/admin').'>Admin</a> / <a href='.url('dashboard/admin/users').'>Users</a> / Change Password';
        // var_dump($breadCrumb);
         return \View::make('dashboard.users.changepassword')
                         ->with('userId',$userId)
-                        ->with('breadCrumb',$breadCrumb);
+                        ->with('breadCrumb',$breadCrumb)
+                        ->with('can_change',$can_change);
     }
     /**
      * Update User's Password

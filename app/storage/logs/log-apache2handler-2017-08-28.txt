@@ -1,0 +1,7 @@
+[2017-08-28 15:28:20] log.ERROR: Something Went Wrong in User Repository - postChangeRole():A group could not be found with the name [ganaral manager]. [] []
+[2017-08-28 15:28:41] log.ERROR: Something Went Wrong in User Repository - getChangeRole():Undefined offset: 0 [] []
+[2017-08-28 15:28:50] log.ERROR: Something Went Wrong in User Repository - getChangeRole():Undefined offset: 0 [] []
+[2017-08-28 15:30:55] log.ERROR: Something Went Wrong in User Repository - postChangeRole():A group could not be found with the name [ganaral_manager]. [] []
+[2017-08-28 15:30:58] log.ERROR: Something Went Wrong in User Repository - getChangeRole():Undefined offset: 0 [] []
+[2017-08-28 15:32:05] log.ERROR: Something Went Wrong in User Repository - postChangeRole():A group could not be found with the name [ganaral_manager]. [] []
+[2017-08-28 15:32:13] log.ERROR: Something Went Wrong in User Repository - getChangeRole():Undefined offset: 0 [] []
