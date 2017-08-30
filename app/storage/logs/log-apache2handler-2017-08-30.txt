@@ -1,0 +1,1 @@
+[2017-08-30 22:29:09] log.ERROR: Something Went Wrong in Calendar Repository - checkPermission():Trying to get property of non-object [] []

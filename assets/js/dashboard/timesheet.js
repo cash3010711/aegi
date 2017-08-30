@@ -42,7 +42,7 @@ var TimesheetView = Backbone.View.extend({
     render: function() {
         if (this.collection.length == 0) {
             $('#timesheet-detail').empty();
-            this.$el.append("<div><div class=nodatadisplay_main><div class=nodatadisplay><h2>Sorry. Couldn't find any entry for this day.</h2><div class=nodata_inner><div class=nodata_left></div><div class=nodata_right></div><div class=nodata_detail_2><img src=" + tempurl + "assets/images/dashboard/smile_icon.png alt=></div></div></div></div></div>");
+            this.$el.append("<div><div class=nodatadisplay_main><div class=nodatadisplay><h2>抱歉，這天尚無任何項目</h2><div class=nodata_inner><div class=nodata_left></div><div class=nodata_right></div><div class=nodata_detail_2><img src=" + tempurl + "assets/images/dashboard/smile_icon.png alt=></div></div></div></div></div>");
         } else {
             $('#timesheet-detail').empty();
             this.collection.forEach(this.addOne, this);

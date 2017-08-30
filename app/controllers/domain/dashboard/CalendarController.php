@@ -73,7 +73,7 @@ class CalendarController extends \BaseController{
 
 			$newjson = json_encode(
 				array_merge(
-				  	$project_user,
+				  	//$project_user,
 					json_decode($eventDates)//,
 					//$tasks_date
 				)

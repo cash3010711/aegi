@@ -20,22 +20,22 @@
                 </div>
               </div>
               <h3>{{$event['title']}}</h3>
-              <span class="eventdate">Category: {{$event['category']}}</span>
+              <span class="eventdate">事件類別 : {{$event['category']}}</span>
               <div class="projectview_list_sec">
                 <div class="projectview_list">
-                  <div class="projectview_left">Date:</div>
+                  <div class="projectview_left">日期 :</div>
                   <div class="projectview_right">
                     <p>{{new ExpressiveDate($event['date'])}}</p>
                   </div>
                 </div>
                 <div class="projectview_list">
-                  <div class="projectview_left">Start Time:</div>
+                  <div class="projectview_left">開始時間 :</div>
                   <div class="projectview_right">
                     <p>{{date('g:iA', strtotime($event['start_time']))}}</p>
                   </div>
                 </div>
                 <div class="projectview_list">
-                  <div class="projectview_left">End Time:</div>
+                  <div class="projectview_left">結束時間 :</div>
                   <div class="projectview_right">
                     <p>{{date('g:iA', strtotime($event['end_time']))}}</p>
                   </div>

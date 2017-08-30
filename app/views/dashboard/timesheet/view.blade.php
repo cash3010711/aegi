@@ -66,37 +66,37 @@
                 </ul>
               </div>
               <div class="row-fluid timesheet-detail-2">
-                <div class="span5">Worked on : </div>
+                <div class="span5">工作標題 </div>
                 <div class="span7">{{$entry['title']}}</div>
               </div>
               <div class="timesheet-detail-3"></div>
-              <div class="workingtime">{{$entry['total_hours']}} hours {{$entry['total_minutes']}} minutes</div>
-              <div class="timesheet-time">from {{date('g:ia', strtotime($entry['start_time']))}} till {{date('g:ia', strtotime($entry['end_time']))}}</div>
+              <div class="workingtime">工作時間: {{$entry['total_hours']}} 時 {{$entry['total_minutes']}} 分</div>
+              <div class="timesheet-time">從 {{date('g:ia', strtotime($entry['start_time']))}} 至 {{date('g:ia', strtotime($entry['end_time']))}}</div>
               <div class="row-fluid timesheet-remark">
-                <div class="span5">Details:</div>
+                <div class="span5">詳細內容 :</div>
                 @if($entry['details'] == null)
-                <div class="span7">[No details]</div>
+                <div class="span7">[無]</div>
                 @else
                 <div class="span7">{{$entry['details']}}</div>
                 @endif
               </div>
               <div class="row-fluid timesheet-remark">
-                <div class="span5">Task:</div>
+                <div class="span5">所屬任務 :</div>
                 @if($entry['task'] == null)
-                <div class="span7">[No task]</div>
+                <div class="span7">[無]</div>
                 @else
                 <div class="span7">{{$entry['task']['name']}}</div>
                 @endif
               </div>
               <div class="row-fluid timesheet-remark">
-                <div class="span5">Remark:</div>
+                <div class="span5">備註:</div>
                 @if($entry['details'] == null)
-                <div class="span7">[No remarks]</div>
+                <div class="span7">[無]</div>
                 @else
                 <div class="span7">{{$entry['remarks']}}</div>
                 @endif
               </div>
-              <div class="timesheet-create">updated on {{$entry['updated_at']}}</div>
+              <div class="timesheet-create">更新於 {{$entry['updated_at']}}</div>
             </div>
           </div>
           @endforeach
@@ -189,16 +189,16 @@
                             </ul>
                         </div>
                         <div class="row-fluid timesheet-detail-2">
-                          <div class="span5">Worked on : </div>
+                          <div class="span5">工作標題 : </div>
                             <div class="span7"><%= title %></div>
                         </div>
                         <div class="timesheet-detail-3"></div>
-                        <div class="workingtime"><%= total_hours %> hours <%= total_minutes %> minutes</div>
-                       <div class="timesheet-time">from <%= start_time %> till <%= end_time %></div>
+                        <div class="workingtime">工作時間：<%= total_hours %> 時 <%= total_minutes %> 分</div>
+                       <div class="timesheet-time">從 <%= start_time %> 至 <%= end_time %></div>
                         <div class="row-fluid timesheet-remark">
-                          <div class="span5">Details:</div>
+                          <div class="span5">詳細內容:</div>
                           <% if(details == null) { %>
-                                    <div class="span7">[No details]</div>
+                                    <div class="span7">[無]</div>
                        <% } else { %>
                            <div class="span7"><%= details %></div>
                          <% } %>
@@ -206,23 +206,23 @@
 
                         </div>
                         <div class="row-fluid timesheet-remark">
-                          <div class="span5">Task:</div>
+                          <div class="span5">所屬任務:</div>
                           <% if(task == null) { %>
-                                    <div class="span7">[No Task]</div>
+                                    <div class="span7">[無]</div>
                        <% } else { %>
                            <div class="span7"><%= task['name'] %></div>
                          <% } %>
 
                         </div>
                           <div class="row-fluid timesheet-remark">
-                          <div class="span5">Remark:</div>
+                          <div class="span5">備註 :</div>
                           <% if(remarks == null) { %>
-                                    <div class="span7">[No Remarks]</div>
+                                    <div class="span7">[無]</div>
                        <% } else { %>
                            <div class="span7"><%= remarks %></div>
                          <% } %>
                         </div>
-                        <div class="timesheet-create">updated on <%= updated_at %></div>
+                        <div class="timesheet-create">更新於 <%= updated_at %></div>
                     </div>
                 </div>
           </script>
@@ -231,13 +231,13 @@
 <div id="myModal-item-delete" class="modal cal_light_box hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Really ?</h3>
+    <h3 id="myModalLabel">確定?</h3>
   </div>
   <div class="modal-body">
-    <div class="confirm-delete">Confirm delete the entry?</div>
+    <div class="confirm-delete">確定要刪除嗎?</div>
     <div class="confirm-button">
-      <form method="post" action="{{url('/dashboard/timesheet/entry/delete')}}">  <input type="hidden" name="entryId" id="entryId" value=  > <button class="submit">Yes please.</a></button></form>
-    <button class="submit dontdelete" id="dontdelete" >No Thanks.</a></button></div>
+      <form method="post" action="{{url('/dashboard/timesheet/entry/delete')}}">  <input type="hidden" name="entryId" id="entryId" value=  > <button class="submit">Yes</a></button></form>
+    <button class="submit dontdelete" id="dontdelete" >No</a></button></div>
   </div>
 </div>
 <!-- End Delete Event Popup -->

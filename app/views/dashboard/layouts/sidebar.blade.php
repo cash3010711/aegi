@@ -5,9 +5,10 @@
       <div class="antiscroll-content">
         <div class="sidebar_inner">
           <div class="login_info">
-            <div class="user_info_data"> <img src="{{url('assets/images/profilepics/')}}/{{Sentry::getUser()->id}}.png" class="user_image" alt="">
-              <h4>Hey {{Sentry::getUser()->first_name}}!</h4>
-            <span>{{ App::make('date')}}</span> </div>
+            <div class="user_info_data"> 
+              <br>
+              <h4>Hey~ {{Sentry::getUser()->first_name}} {{Sentry::getUser()->last_name}}！</h4>
+            <span><center>{{ App::make('date')}}</center></span> </div>
           </div>
           <div id="side_accordion" class="accordion">
             <div class="accordion-group none_accrodion">

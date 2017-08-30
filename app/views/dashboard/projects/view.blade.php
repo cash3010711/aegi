@@ -8,7 +8,7 @@
   <div class="main_content">
     <div class="row-fluid">
       <div class="span12 project_detail">
-        <h2><a href="{{url('/dashboard')}}">Dashboard</a> / <a href="{{url('/dashboard/projects')}}">Projects</a> / {{$project['project_name']}}</h2>
+        <h2><a href="{{url('/dashboard')}}">總覽</a> / <a href="{{url('/dashboard/projects')}}">計畫</a> / {{$project['project_name']}}</h2>
         @if($project['status'] == 'active')
         <div class="row-fluid proj_active">
           @elseif($project['status'] == 'completed')
@@ -44,18 +44,18 @@
                     </div>
                     <div class="row-fluid span12 start-d-main">
                       @if($project['status'] == 'active')
-                      <div class="status_a">Status: Active</div>
+                      <div class="status_a">狀態 : 進行中</div>
                       @elseif($project['status'] == 'delayed')
-                      <div class="status_d">Status: Delayed</div>
+                      <div class="status_d">狀態 : 延誤</div>
                       @elseif($project['status'] == 'completed')
-                      <div class="status_c">Status: Completed</div>
+                      <div class="status_c">狀態 : 已完成</div>
                       @endif
                       <div class="row-fluid">
-                        <div class="span4 start-d-1">Start date: </div>
+                        <div class="span4 start-d-1">開始時間 : </div>
                         <div class="span8 start-d-2">{{new ExpressiveDate($project['start_date'])}}</div>
                       </div>
                       <div class="row-fluid">
-                        <div class="span4 start-d-1">End date: </div>
+                        <div class="span4 start-d-1">結束時間 : </div>
                         @if($project['status'] == 'delayed')
                         @if($project['end_date'] != null)
                         <div class="span8 start-d-2 delayed_end_date">{{new ExpressiveDate($project['end_date'])}}</div>
@@ -72,7 +72,7 @@
                       </div>
                     </div>
                     <div class="row-fluid span12 proj_act_descr">
-                      <h4>Description:</h4>
+                      <h4>內容 :</h4>
                       @if($project['description'] != null)
                       <p>{{$project['description']}} </p>
                       @else
@@ -80,7 +80,7 @@
                       @endif
                     </div>
                     <div class="row-fluid span12 proj_act_descr">
-                      <h4>Note:</h4>
+                      <h4>注意事項:</h4>
                       <p>@if($project['note'] != null)
                       {{$project['note']}}
                       @else
@@ -92,18 +92,18 @@
                   <!-- Right Part -->
                   <div class="span6 proj_active_right">
                     <div class="row-fluid span12 a_reamining">
-                      <h4>Tasks:</h4>
+                      <h4>相關任務 :</h4>
                       @if($project['total_tasks'] != 0)
-                      <h4><img src="{{asset('assets/images/dashboard/p_arrow.png')}}" alt=""><a class="projecttaskrem" href="{{url('/dashboard/tasks/project',array($project['id']))}}">{{$project['uncompl_tasks']}} out of {{$project['total_tasks']}} remaining</a></h4>
+                      <h4><img src="{{asset('assets/images/dashboard/p_arrow.png')}}" alt=""><a class="projecttaskrem" href="{{url('/dashboard/tasks/project',array($project['id']))}}">{{$project['total_tasks']}} 個任務中剩餘 {{$project['uncompl_tasks']}} 個任務未完成</a></h4>
                       @else
-                      <div class="no_file"> [ No Tasks for this Project ]</div>
+                      <div class="no_file"> [ 此計畫無任務 ]</div>
                       @endif
                     </div>
                     <div class="row-fluid span12 a_reamining">
-                      <h4>Files:</h4>
+                      <h4>相關檔案 :</h4>
                       @if($files == null)
                       <div class ="no_file" >
-                        [ No files are attached with this project ]
+                        [ 無檔案 ]
                       </div>
                       @else
                       <ul class="files_1">
@@ -123,7 +123,7 @@
                       @endif
                     </div>
                     <div class="row-fluid span12 a_reamining">
-                      <h4>Collaborators:</h4>
+                      <h4>參與者 :</h4>
                       @if($project['status'] == 'active')
                       <ul class="collaborators">
                         @elseif($project['status'] == 'completed')
@@ -137,7 +137,7 @@
                           </ul>
                         </div>
                         <div class="row-fluid span12 a_reamining">
-                          <h4>Client:</h4>
+                          <h4>客戶 :</h4>
                           <ul class="reamining_1">
                             @if($project['project_client'] == null or $project['project_client'] == '')
                             <li>[ No Client has been specified ]</li>
@@ -160,13 +160,13 @@
 <div id="myModal-item-delete" class="modal cal_light_box hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Really ?</h3>
+    <h3 id="myModalLabel">確定？</h3>
   </div>
   <div class="modal-body">
-    <div class="confirm-delete">Confirm delete the Proect?</div>
+    <div class="confirm-delete">確定要刪除嗎？</div>
     <div class="confirm-button">
-      <form method="post" action="{{url('/dashboard/projects/delete')}}">  <input type="hidden" name="projectId" id="projectId" value="{{$project['id']}}"  > <button class="submit">Yes please.</a></button></form>
-    <button class="submit dontdelete" id="dontdelete" >No Thanks.</a></button></div>
+      <form method="post" action="{{url('/dashboard/projects/delete')}}">  <input type="hidden" name="projectId" id="projectId" value="{{$project['id']}}"  > <button class="submit">Yes</a></button></form>
+    <button class="submit dontdelete" id="dontdelete" >No</a></button></div>
   </div>
 </div>
 <!-- End Delete Popup -->

@@ -60,43 +60,43 @@
                 
                   <div class="viewuser_active">
                     <div class="viewuser_active_title">
-                      <span>Activated:</span>
+                      <span>可使用:</span>
                       @if($user['activated'] == true)
                       <div class="view_checkbox"><input type="checkbox" id="activated-{{$user['id']}}" checked class="regular-checkbox checked" /><label userid={{$user['id']}} checked class="activated" for="activated-{{$user['id']}}"></label></div>
                       @else
                       <div class="view_checkbox"><input type="checkbox" id="activated-{{$user['id']}}" class="regular-checkbox checked" /><label userid={{$user['id']}} class="activated"  for="activated-{{$user['id']}}"></label></div>
                       @endif
                     </div>
-                    <p>activated at: {{new ExpressiveDate($user['activated_at'])}}</p>
+                    <p>使用於 : {{new ExpressiveDate($user['activated_at'])}}</p>
                   </div>
                   <div class="viewuser_active">
                     @if($user['suspended'] == true)
                     <div class="viewuser_active_title">
-                      <span>Suspended:</span>
+                      <span>停權:</span>
                       <div class="view_checkbox"><input type="checkbox" id="suspended-{{$user['id']}}" checked class="regular-checkbox checked" /><label userid={{$user['id']}} checked class="suspended" for="suspended-{{$user['id']}}"></label></div>
                     </div>
-                    <p>The user is suspended. </p>
+                    <p>該用戶被停權 </p>
                     @else
                     <div class="viewuser_active_title">
-                      <span>Suspended:</span>
+                      <span>停權:</span>
                       <div class="view_checkbox"><input type="checkbox" id="suspended-{{$user['id']}}"  class="regular-checkbox checked" /><label userid={{$user['id']}} class="suspended" for="suspended-{{$user['id']}}"></label></div>
                     </div>
-                    <p>The user is not suspended. </p>
+                    <p>該用戶有權 </p>
                     @endif
                   </div>
                   <div class="viewuser_active">
                     @if($user['banned'] == true)
                     <div class="viewuser_active_title">
-                      <span>Banned:</span>
+                      <span>禁止:</span>
                       <div class="view_checkbox"><input type="checkbox" id="banned-{{$user['id']}}" checked class="regular-checkbox checked" /><label userid={{$user['id']}} checked class="banned" for="banned-{{$user['id']}}"></label></div>
                     </div>
-                    <p>The user is banned.</p>
+                    <p>該用戶被禁止</p>
                     @else
                     <div class="viewuser_active_title">
-                      <span>Banned:</span>
+                      <span>禁止:</span>
                       <div class="view_checkbox"><input type="checkbox" id="banned-{{$user['id']}}"  class="regular-checkbox checked" /><label userid={{$user['id']}} class="banned" for="banned-{{$user['id']}}"></label></div>
                     </div>
-                    <p>The user is not banned.</p>
+                    <p>該用戶未被禁止</p>
                     @endif
                   </div>
                   
@@ -104,10 +104,10 @@
                 @endif
                 <!-- Right -->
                 <div class="span6 viewuser_right">
-                  <p>Login atempts: {{$user['loginAttempt']}}</p>
-                  <p>Last Login: {{new ExpressiveDate($user['last_login'])}}</p>
-                  <p>Created at: {{new ExpressiveDate($user['created_at'])}}</p>
-                  <p>Updated at: {{new ExpressiveDate($user['updated_at'])}}</p>
+                  <p>嘗試登入 : {{$user['loginAttempt']}}</p>
+                  <p>上次登入 : {{new ExpressiveDate($user['last_login'])}}</p>
+                  <p>創建於 : {{new ExpressiveDate($user['created_at'])}}</p>
+                  <p>更新於 : {{new ExpressiveDate($user['updated_at'])}}</p>
                 </div>
               </div>
             </div>

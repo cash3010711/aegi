@@ -7,7 +7,7 @@
   <div class="main_content">
     <div class="row-fluid">
       <div class="span12 project_detail">
-        <h2><a href="{{url('/dashboard')}}">Dashboard<a> / <a href="{{url('/dashboard/projects')}}">Projects</a> / Edit</h2>
+        <h2><a href="{{url('/dashboard')}}">總覽<a> / <a href="{{url('/dashboard/projects')}}">計畫</a> / 編輯</h2>
         <div class="row-fluid proj_create">
           <form class="" action='' method='post' id="editproject" data-validate="parsley">
             <h3><input type="text" name="project_name" id="project_name" class="proj_create_in" value="{{$project['project_name']}}" placeholder="Project Name (required)" data-required="true" data-show-errors="false"> <div class="p-icon-main">
@@ -18,28 +18,28 @@
               <div class="span7 add-proj-form form-horizontal">
                 <fieldset>
                   <div class="control-group">
-                    <label>Description:
-                      <p class="help-block">(optional)</p>
+                    <label>計畫內容 :
+                      <p class="help-block"></p>
                     </label>
                     <textarea class="add-proj-form-t" placeholder="Description" name="description" id="description">{{$project['description']}}</textarea>
                   </div>
                   <div class="control-group">
-                    <label>Kick off dates:
+                    <label>期限 :
                     </label>
                     <input id="startdate" name="startdate" type="text" class="span6 pull-left" placeholder="Start date" value="{{new ExpressiveDate($project['start_date'])}}" data-required="true" data-trigger="change">
                     <input id="enddate" name="enddate" type="text"  class="span6 pull-right" placeholder="End date" value="{{new ExpressiveDate($project['end_date'])}}" data-required="true" data-trigger="change">
                   </div>
                   <div class="control-group">
-                    <label class="control-label" for="passwordinput">Client:
-                      <p class="help-block">(optional)</p>
+                    <label class="control-label" for="passwordinput">客戶 :
+                      <p class="help-block"></p>
                     </label>
                     <div class="controls">
                       <input id="project_client" name="project_client" type="text" placeholder="Client" value="{{$project['project_client']}}">
                     </div>
                   </div>
                   <div class="control-group">
-                    <label class="control-label" for="passwordinput">Note:
-                      <p class="help-block">(optional)</p>
+                    <label class="control-label" for="passwordinput">注意事項 :
+                      <p class="help-block"></p>
                     </label>
                     <div class="controls">
                       <textarea class="add-proj-form-t" placeholder="Note" id="note" name="note">{{$project['note']}}</textarea>
@@ -47,38 +47,38 @@
                   </div>
                   <div class="content_detail">
                     <div class="row-fluid field_data">
-                      <div class="span5 field_name">Status:</div>
+                      <div class="span5 field_name">狀態 :</div>
                       <div class="span7 radio-group">
                         @if($project['status'] == 'active')
                         <div class="span12 radio_proj_edit">
                           <input type="radio" id="1" name="status" value="active" checked>
-                        <span class="radio-label"><span class="activelabel">Active</span></span> </div>
+                        <span class="radio-label"><span class="activelabel">進行中</span></span> </div>
                         <div class="span12 radio_proj_edit">
                           <input type="radio" id="2" name="status" value="completed" >
-                        <span class="radio-label"><span class="completedlabel">Completed</span></span></div>
+                        <span class="radio-label"><span class="completedlabel">已完成</span></span></div>
                         <div class="span12 radio_proj_edit">
                           <input type="radio" id="3" name="status" value="delayed" >
-                        <span class="radio-label"><span class="delayedlabel">Delayed</span></span></div>
+                        <span class="radio-label"><span class="delayedlabel">延誤</span></span></div>
                         @elseif($project['status'] == 'completed')
                         <div class="span12 radio_proj_edit">
                           <input type="radio" id="1" name="status" value="active" >
-                        <span class="radio-label"><span class="activelabel">Active</span></span> </div>
+                        <span class="radio-label"><span class="activelabel">進行中</span></span> </div>
                         <div class="span12 radio_proj_edit">
                           <input type="radio" id="2" name="status" value="completed" checked >
-                        <span class="radio-label"><span class="completedlabel">Completed</span></span></div>
+                        <span class="radio-label"><span class="completedlabel">已完成</span></span></div>
                         <div class="span12 radio_proj_edit">
                           <input type="radio" id="3" name="status" value="delayed" >
-                        <span class="radio-label"><span class="delayedlabel">Delayed</span></span></div>
+                        <span class="radio-label"><span class="delayedlabel">延誤</span></span></div>
                         @elseif($project['status'] == 'delayed')
                         <div class="span12 radio_proj_edit">
                           <input type="radio" id="1" name="status" value="active" >
-                        <span class="radio-label"><span class="activelabel">Active</span></span> </div>
+                        <span class="radio-label"><span class="activelabel">進行中</span></span> </div>
                         <div class="span12 radio_proj_edit">
                           <input type="radio" id="2" name="status" value="completed" >
-                        <span class="radio-label"><span class="completedlabel">Completed</span></span></div>
+                        <span class="radio-label"><span class="completedlabel">已完成</span></span></div>
                         <div class="span12 radio_proj_edit">
                           <input type="radio" id="3" name="status" value="delayed" checked >
-                        <span class="radio-label"><span class="delayedlabel">Delayed</span></span></div>
+                        <span class="radio-label"><span class="delayedlabel">延誤</span></span></div>
                         @endif
                       </div>
                     </div>
@@ -88,7 +88,7 @@
               <!-- Right Part -->
               <div class="span5 add_proj_right add-proj-form">
                 <div class="control-group col">
-                  <label class="control-label" for="passwordinput">Collaborators:<span class="tooltipster-icon" title="To add the collaborator start typing the name and select the appropriate from the list. Please note that only those name will appear in the list who are registered in the app.Please add your name as well if you are one of them.">(?)</span></label>
+                  <label class="control-label" for="passwordinput">參與者 :<span class="tooltipster-icon" title="To add the collaborator start typing the name and select the appropriate from the list. Please note that only those name will appear in the list who are registered in the app.Please add your name as well if you are one of them.">(?)</span></label>
                   <div class="controls">
                     <div class="span12 flatui-detail">
                       <input id="plugin" name="passwordinput" type="text" placeholder="Add Name">
@@ -106,7 +106,7 @@
                 </div>
               </div>
             </div>
-            <div class="submit_button_main"><button class="submit">Update</a></button></div>
+            <div class="submit_button_main"><button class="submit">確認</a></button></div>
           </div>
         </div>
         <input type="hidden" id="projectid" name="projectid" value={{$project['id']}} />

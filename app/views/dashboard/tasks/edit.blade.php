@@ -7,7 +7,7 @@
   <div class="main_content">
     <div class="row-fluid">
       <div class="span12 project_detail">
-        <h2><a href="{{url('/dashboard')}}">Dashboard<a> / <a href="{{url('/dashboard/tasks')}}">Tasks</a> / Edit</h2>
+        <h2><a href="{{url('/dashboard')}}">總覽<a> / <a href="{{url('/dashboard/tasks')}}">任務</a> / 編輯</h2>
         <!-- Add New Task -->
         <div class="row-fluid add_new_task">
           <div class="span7 add_new_task_left" id="add_new_task_left">
@@ -18,20 +18,20 @@
               <div class="add-proj-form add_task_form">
                 <fieldset>
                   <div class="control-group">
-                    <label>Kick off dates:
+                    <label>期限 :
                     </label>
                     <input id="startdate" name="startdate" type="text" class="span6 pull-left" value="{{new ExpressiveDate($task['start_date'])}}" placeholder="Start date" data-required="true" data-trigger="change">
                     <input id="enddate" name="enddate" type="text" class="span6 pull-right" value="{{new ExpressiveDate($task['end_date'])}}" class="span6 pull-right" placeholder="End date" data-required="true" data-trigger="change">
                   </div>
                   <div class="control-group">
-                    <label>Project:
-                      <p class="help-block">(optional)</p>
+                    <label>計畫 :
+                      <p class="help-block"></p>
                     </label>
                     <select name="projectlist" id="projectlist" class="projectlist" tabindex="1">
                       @if($task['project_id'] == null)
-                      <option name="" value="null" selected="selected" title="">None</option>
+                      <option name="" value="null" selected="selected" title="">無</option>
                       @else
-                      <option name="" value="null"  title="">None</option>
+                      <option name="" value="null"  title="">無</option>
                       @endif
                       @if($projects != null)
                       @foreach($projects as $project)
@@ -45,13 +45,13 @@
                     </select>
                   </div>
                   <div class="control-group">
-                    <label>Note:
-                      <p class="help-block">(optional)</p>
+                    <label>注意事項 :
+                      <p class="help-block"></p>
                     </label>
                     <textarea id="note" class="add-proj-form-t" placeholder="Note">{{$task['note']}}</textarea>
                   </div>
                   <div class="control-group">
-                    <label for="passwordinput">Asignee:<span class="tooltipster-icon" title="To add the asignee start typing the name and select the appropriate user from the list. Please note that only those name will appear in list who are registered in the app. Please add your name as well if you are one of them.">(?)</span></label>
+                    <label for="passwordinput">參與者 :<span class="tooltipster-icon" title="To add the asignee start typing the name and select the appropriate user from the list. Please note that only those name will appear in list who are registered in the app. Please add your name as well if you are one of them.">(?)</span></label>
                     <div class="controls" style="margin:0;">
                       <div class="span12 flatui-detail" style="position:relative;">
                         <input id="plugin" name="passwordinput" type="text" placeholder="Add Name">
@@ -67,16 +67,16 @@
                       </div>
                     </div>
                   </div>
-                  <div class="add_task_button_main"><button class="add_task_submit">Update</a></button></div>
+                  <div class="add_task_button_main"><button class="add_task_submit">確認</a></button></div>
                 </fieldset>
               </form>
             </div>
           </div>
           <div class="span5 add_new_task_right" id="add_new_task_right" >
-            <h3>Add Sub-tasks</h3>
+            <h3>新增子任務</h3>
             <div class="add-proj-form add_task_form" >
               <form class="form-horizontal" id="newsubtaskform">
-                <input id="subtasks"  name="" type="text" placeholder="Subtasks (optional)">
+                <input id="subtasks"  name="" type="text" placeholder="子任務">
               </form>
               <input style="display: none;" name="taskId" id="taskId" class="tagsinput"  value={{$task['id']}} />
               <div class="row-fluid sub_task_list_main">
@@ -99,8 +99,8 @@
                   </div>
                 </div>
                 <div class="add_task_button_main">
-                  <a  href={{url('/dashboard/tasks/edit/add/files',array($task['id']))}} class="add_project" id="taskfiles">Add / Remove files</a>
-                  <a  href="{{url('/dashboard/task/edited',array($task['id']))}}" class="add_project">I am Done</a>
+                  <a  href={{url('/dashboard/tasks/edit/add/files',array($task['id']))}} class="add_project" id="taskfiles">新增/刪除檔案</a>
+                  <a  href="{{url('/dashboard/task/edited',array($task['id']))}}" class="add_project">完成</a>
                 </div>
               </div>
             </div>

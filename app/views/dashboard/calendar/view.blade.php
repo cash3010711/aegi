@@ -26,9 +26,8 @@
             <div class="cal_month" style="margin:0px;" id="cal_year">{{$todaysDate->format('Y')}}</div>
           </div>
           <div class="time_listing" id="time_listing">
-            @if(sizeof($events) != 0 or sizeof($projects_day) != 0)
-              @if(sizeof($events) != 0)
-                @foreach($events as $event)
+            @if(sizeof($events) != 0)
+              @foreach($events as $event)
                 <div class="row-fluid">
                   <div class="span5 time_listing_1">{{date('g:ia', strtotime($event['start_time']))}} - {{date('g:ia', strtotime($event['end_time']))}} </div>
                   <div class="span7 time_listing_1"><a data-toggle="modal" class="cal_event_title"  data-placement="right"  eventid={{$event['id']}} href="#myModal4">{{$event['title']}}</a></div>
@@ -57,42 +56,8 @@
                     </div>
                   </div>
                 </div>
-                @endforeach
-              @endif
-              <@if(sizeof($projects_day) != 0)
-                @foreach($projects_day as $project)
-                <div class="row-fluid">
-                  <div class="span5 time_listing_1">{{date('Y-m-d', strtotime($project['date']))}}</div>
-                  <div class="span7 time_listing_1"><a data-toggle="modal" class="cal_event_title"  data-placement="right"  eventid={{$project['id']}} href="#myModal4">{{$project['project_name']}}</a></div>
-                </div>
-                <div class="calender-viewevent hide">
-                  @if($project['editdelete'] == 'yes')
-                  <div class="p-icon-inner"><a class="p-icon-1" title="Edit Event" href="{{url('/dashboard/projects',array($project['id']))}}"><img alt="" src="{{asset('assets/images/dashboard/p-edit.png')}}"></a></div>
-                  @endif
-                  <div class="viewevent-detail-inner">
-                    <!--Left--> 
-                    <div class="viewevent-left">
-                      <div class="viewevent-detail-1">Description: <span class="viewevent-note"> {{$project['description']}}</span></div>
-                      <div class="viewevent-detail-1">Client:<span class="viewevent-note"> {{$project['client']}}</span></div>
-                      <div class="viewevent-detail-1">Note: <span class="viewevent-note"> {{$project['notes']}}</span></div>
-                    </div>
-                    <!-- Right --> 
-                    <div class="viewevent-right">
-                      <div class="viewevent-asignee">
-                        <label>People:</label>
-                        <div class="viewevent-asignee-right">
-                          @foreach($event['users'] as $user)
-                          <div class="viewevent-detail-3">{{$user['first_name']}} {{$user['last_name']}}</div>
-                          @endforeach
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                @endforeach
-              @endif
+              @endforeach
             @else
-            
             <div class="row-fluid">
               <div class="span12 time_listing_1"> [ 無行程 !]</div>
             </div>
@@ -121,6 +86,20 @@
                     <% for(var j = 0; j < 7; j++){ %>
                     <% var d = j + i * 7; %>
                     <td class='<%= days[d].classes %>'><div class='day-contents'><%= days[d].day %>
+                    <!--
+                    days[d].classes為決定是否可按下 
+                    回傳值為
+                      day event calendar-day-日期 為可按下
+                      day calendar-day-日期 為不可按下
+                    -->
+                    <!--
+                    days[d].day為日期(1 2 3.......)
+                    -->
+                    <!--
+                    day calendar-day-日期 ->白色不可按
+                    有event 為綠色
+                    有today表示為今日 為藍色
+                    -->
                     </div></td>
                     <% } %>
                   </tr>
@@ -135,6 +114,7 @@
     </div>
   </div>
 </div>
+
 <!-- Add Event Popup -->
 <div id="myModal" class="modal hide fade cal_light_box" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <form class="form-horizontal" action='calendar/add' method='post' id="addevent" data-validate="parsley">
@@ -168,9 +148,9 @@
                       類別 category-->
                     <select name="category" id="category" tabindex="1" style="width:270px;" data-required="true"  data-show-errors="false">
                       <option name="" value="" selected="selected" title="">選擇類別</option>
-                      <option  name="" value="Meeting - General" title="">一般會議</option>
-                      <option  name="" value="Meeting - Project" title="">計劃會議</option>
-                      <option  name="" value="Meeting - Task" title="">任務會議</option>
+                      <option  name="" value="Meeting - General" title="">Meeting - General</option>
+                      <option  name="" value="Meeting - Project" title="">Meeting - Project</option>
+                      <option  name="" value="Meeting - Task" title="">Meeting - Task</option>
                       <option  name="" value="Deliverer" title="">Deliverer</option>
                       <option  name="" value="Client" title="">Client</option>
                       <option  name="" value="Others" title="">其他</option>
@@ -323,8 +303,8 @@ $(document).ready(function() {
         console.log($(e.element).hasClass("event"));
         if ($(e.element).hasClass("event")) 
         {
-          var tempclass = $(e.element).attr("class");
-          var finaldate = tempclass.split('day-')[1];
+          var tempclass = $(e.element).attr("class"); //抓class中的值 "day event clalendar-day-2017-08-01"
+          var finaldate = tempclass.split('day-')[1]; //分割上面的字串 取得日期 "2017-08-01"
           var eventsModel = new EventsList([], {
             selectedDate: finaldate
           });
@@ -332,6 +312,10 @@ $(document).ready(function() {
             collection: eventsModel
           });
           eventsView.render();
+          // var eventsView2 = new EventsListView2({
+          //   collection: eventsModel
+          // });
+          // eventsView2.render();
         } else 
         {
           

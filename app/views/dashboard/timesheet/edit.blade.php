@@ -7,7 +7,7 @@
   <div class="main_content">
     <div class="row-fluid">
       <div class="span12 project_detail">
-        <h2><a href="{{url('/dashboard')}}">Dashboard<a> / <a href="{{url('/dashboard/timesheet')}}">Timesheet</a> / Edit Entry</h2>
+        <h2><a href="{{url('/dashboard')}}">總覽<a> / <a href="{{url('/dashboard/timesheet')}}">時程表</a> / 編輯項目</h2>
         <div class="row-fluid proj_create">
           <form class="" action='' method='post' data-validate="parsley">
             <h3><input type="text" name="title" id="title" class="proj_create_in" value="{{$entry['title']}}" placeholder="Event Name (required)" data-required="true" data-show-errors="false"> <div class="p-icon-main">
@@ -23,7 +23,7 @@
                     <input id="endtime" name="endtime" type="text" class="span3" placeholder="Till" data-required="true" data-show-errors="true" value="{{date('g:iA', strtotime($entry['end_time']))}}">
                   </div>
                   <div class="control-group">
-                    <label class="control-label" for="passwordinput">Details:</label>
+                    <label class="control-label" for="passwordinput">詳細內容 :</label>
                     <div class="controls">
                       <textarea name="details" id="details" class="add-proj-form-t" placeholder="Details">{{$entry['details']}}</textarea>
                     </div>
@@ -34,7 +34,7 @@
               <div class="span5 add_proj_right add-proj-form">
                 <fieldset>
                   <div class="control-group">
-                    <label class="control-label" for="passwordinput">Task:</label>
+                    <label class="control-label" for="passwordinput">所屬任務 :</label>
                     <div class="controls">
                       <div class="task_select">
                         <select name="task" id="task" tabindex="1">
@@ -47,26 +47,26 @@
                           @endif
                           @endforeach
                           @if($entry['task_id'] == null)
-                          <option  name="" selected value="others" title="">Others</option>
+                          <option  name="" selected value="others" title="">其他</option>
                           @else
-                          <option  name="" value="others" title="">Others</option>
+                          <option  name="" value="others" title="">其他</option>
                           @endif
                           @else
-                          <option  name="" value="others" title="">No tasks</option>
+                          <option  name="" value="others" title="">無</option>
                           @endif
                         </select>
                       </div>
                     </div>
                   </div>
                   <div class="control-group">
-                    <label class="control-label" for="passwordinput">Remarks:</label>
+                    <label class="control-label" for="passwordinput">備註 :</label>
                     <div class="controls">
                       <textarea name="remarks" id="remarks" class="add-proj-form-t" placeholder="Remarks">{{$entry['remarks']}}</textarea>
                     </div>
                   </div>
                 </fieldset>
               </div>
-              <div class="submit_button_main"><button class="submit">Update</a></button></div>
+              <div class="submit_button_main"><button class="submit">確認</a></button></div>
             </div>
           </div>
           <input type="hidden" id="entryid" name="entryid" value="{{$entry['id']}}" />

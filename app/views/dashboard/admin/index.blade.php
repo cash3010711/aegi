@@ -66,7 +66,7 @@
             </div>            
           </div> 
         </div>
-        <button class="submit">Submit</button>
+        <button class="submit">確定</button>
       </form>
     </div>
   </div>
