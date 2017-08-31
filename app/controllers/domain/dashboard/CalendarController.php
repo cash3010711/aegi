@@ -40,18 +40,18 @@ class CalendarController extends \BaseController{
 			
 			//$projects = $this->project->getProjects($userId,$day);
 
-			$project_user_count = \Projectcollabs::where('user_id','=',$userId)->count(); //當前使用者的計畫數量
-			$projectuser_first_id = \Projectcollabs::where('id','>',0)->pluck('id'); //第一筆pro_user的id
-			$project_user_all_count = \Projectcollabs::where('id','>',0)->count(); //project user的總資料筆數
-			$project_user; //存放project user相關值
-			for($loop=0,$loop2=0;$loop<$project_user_all_count;$loop++){
-				$projectuser_userid = \Projectcollabs::where('id','=',$projectuser_first_id+$loop)->pluck('user_id'); //取得全部的user_id
-				if($projectuser_userid == $userId){
-					$project_user_project_id = \Projectcollabs::where('id','=',$projectuser_first_id+$loop)->pluck('project_id');
-					$project_user[$loop2]['date'] = Project::where('id','=',$project_user_project_id)->pluck('start_date');
-					$loop2++;
-				}
-			}
+			// $project_user_count = \Projectcollabs::where('user_id','=',$userId)->count(); //當前使用者的計畫數量
+			// $projectuser_first_id = \Projectcollabs::where('id','>',0)->pluck('id'); //第一筆pro_user的id
+			// $project_user_all_count = \Projectcollabs::where('id','>',0)->count(); //project user的總資料筆數
+			// $project_user; //存放project user相關值
+			// for($loop=0,$loop2=0;$loop<$project_user_all_count;$loop++){
+			// 	$projectuser_userid = \Projectcollabs::where('id','=',$projectuser_first_id+$loop)->pluck('user_id'); //取得全部的user_id
+			// 	if($projectuser_userid == $userId){
+			// 		$project_user_project_id = \Projectcollabs::where('id','=',$projectuser_first_id+$loop)->pluck('project_id');
+			// 		$project_user[$loop2]['date'] = Project::where('id','=',$project_user_project_id)->pluck('start_date');
+			// 		$loop2++;
+			// 	}
+			// }
 
 			/*$projects_first_date = Project::where('id','>',0)->pluck('id');
 			$projects_count = Project::where('id','>',0)->count();
@@ -71,33 +71,34 @@ class CalendarController extends \BaseController{
 			//Get all  event dates for the user
 			$eventDates = $this->event->getEventDates($userId);
 
-			$newjson = json_encode(
-				array_merge(
-				  	//$project_user,
-					json_decode($eventDates)//,
-					//$tasks_date
-				)
-			);
+			// $newjson = json_encode(
+			// 	array_merge(
+			// 	  	//$project_user,
+			// 		json_decode($eventDates)//,
+			// 		//$tasks_date
+			// 	)
+			// );
+			$newjson = $eventDates;
 
-			for($loop=0,$loop2=0;$loop<$project_user_all_count;$loop++){
-				$projectuser_userid = \Projectcollabs::where('id','=',$projectuser_first_id+$loop)->pluck('user_id'); //取得全部的user_id
-				if($projectuser_userid == $userId){
-					$project_user_project_id = \Projectcollabs::where('id','=',$projectuser_first_id+$loop)->pluck('project_id');
-					$project_user[$loop2]['id'] = Project::where('id','=',$project_user_project_id)->pluck('id');
-					$project_user[$loop2]['project_name'] = Project::where('id','=',$project_user_project_id)->pluck('project_name');
-					$project_user[$loop2]['client'] = Project::where('id','=',$project_user_project_id)->pluck('project_client');
-					$project_user[$loop2]['notes'] = Project::where('id','=',$project_user_project_id)->pluck('note');
-					$project_user[$loop2]['description'] = Project::where('id','=',$project_user_project_id)->pluck('description');
-					$project_create = Project::where('id','=',$project_user_project_id)->pluck('created_at');
-					$project_updated = Project::where('id','=',$project_user_project_id)->pluck('updated_at');
-					if((Project::where('id','=',$project_user_project_id)->pluck('deleted')!=null) && ($project_create == $project_updated)){
-						$project_user[$loop2]['editdelete'] = 'no';
-					}else{
-						$project_user[$loop2]['editdelete'] = 'yes';
-					}
-					$loop2++;
-				}
-			}
+			// for($loop=0,$loop2=0;$loop<$project_user_all_count;$loop++){
+			// 	$projectuser_userid = \Projectcollabs::where('id','=',$projectuser_first_id+$loop)->pluck('user_id'); //取得全部的user_id
+			// 	if($projectuser_userid == $userId){
+			// 		$project_user_project_id = \Projectcollabs::where('id','=',$projectuser_first_id+$loop)->pluck('project_id');
+			// 		$project_user[$loop2]['id'] = Project::where('id','=',$project_user_project_id)->pluck('id');
+			// 		$project_user[$loop2]['project_name'] = Project::where('id','=',$project_user_project_id)->pluck('project_name');
+			// 		$project_user[$loop2]['client'] = Project::where('id','=',$project_user_project_id)->pluck('project_client');
+			// 		$project_user[$loop2]['notes'] = Project::where('id','=',$project_user_project_id)->pluck('note');
+			// 		$project_user[$loop2]['description'] = Project::where('id','=',$project_user_project_id)->pluck('description');
+			// 		$project_create = Project::where('id','=',$project_user_project_id)->pluck('created_at');
+			// 		$project_updated = Project::where('id','=',$project_user_project_id)->pluck('updated_at');
+			// 		if((Project::where('id','=',$project_user_project_id)->pluck('deleted')!=null) && ($project_create == $project_updated)){
+			// 			$project_user[$loop2]['editdelete'] = 'no';
+			// 		}else{
+			// 			$project_user[$loop2]['editdelete'] = 'yes';
+			// 		}
+			// 		$loop2++;
+			// 	}
+			// }
 
 			/*for($loop=0;$loop<$projects_count;$loop++){
 				$projects_date[$loop]['project_name'] = Project::where('id','=',$projects_first_date+$loop)->pluck('project_name');
@@ -110,9 +111,9 @@ class CalendarController extends \BaseController{
 		   				->with('eventDates',$eventDates)
 						->with('events', $events)
 						//->with('tasks_date',json_encode($tasks_date))
-						->with('projects_date',json_encode($project_user))
+						// ->with('projects_date',json_encode($project_user))
 						//->with('tasks_day',$tasks_date)
-						->with('projects_day',$project_user)
+						// ->with('projects_day',$project_user)
 						->with('newjson',$newjson);
 		
 	}

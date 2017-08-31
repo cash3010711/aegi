@@ -16,9 +16,9 @@
                 <div class="span6"><input type="text" placeholder="電子信箱" class="span12" name="email"data-required="true"  data-show-errors="true"></div>
                 <div class="task_select span4">
                   <select name="role" class="global_select" id="role" tabindex="1">
-                    <option  name="" value="user" title="">一般使用者</option>
-                    <option  name="" value="leader" title="">主管</option>
-                    <option  name="" value="manager" title="" >經理</option>
+                    <option  name="" value="user" title="">user</option>
+                    <option  name="" value="leader" title="">leader</option>
+                    <option  name="" value="manager" title="" >manager</option>
                   </select>
                 </div>
                 <div class="span2">

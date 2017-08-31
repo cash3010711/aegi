@@ -44,10 +44,10 @@
                     <div class="span3 field_name">權限</div>
                     <div class="span5">
                       <select name="role" class="global_select" id="role" tabindex="1">
-                        <option  name="" value="user" title="">一般使用者</option>
-                        <option  name="" value="leader" title="">主管</option>
-                        <option  name="" value="manager" title="" >經理</option>
-                        <option  name="" value="ganaral_manager" title="">總經理</option>
+                        <option  name="" value="user" title="">user</option>
+                        <option  name="" value="leader" title="">leader</option>
+                        <option  name="" value="manager" title="" >manager</option>
+                        <option  name="" value="ganaral_manager" title="">ganaral_manager</option>
                       </select>
                     </div>
                     <div class="span4"></div>

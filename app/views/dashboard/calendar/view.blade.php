@@ -7,10 +7,6 @@
   <div class="main_content">
     <div class="row-fluid">
       <div class="span12 project_detail">
-
-      <input type="hidden" value={{$projects_date}}><!--test-->
-      <input type="hidden" value={{$newjson}}><!--test-->
-      
         <h2><a href="{{url('/dashboard')}}">總覽</a> / 行事曆</h2>
         <div class="add_project_main">
           <a data-toggle="modal" href="{{url('/dashboard/calendar/event/createdbyme')}}" class="add_project pull-right"> 查看個人事件</a>
@@ -18,52 +14,52 @@
         </div>
         <!-- Calendar Detail -->
         <div class="row-fluid cal_detail">
-        <!-- Cal Left -->
-        <div class="span5 cal_left">
-          <div class="row-fluid">
-            <div class="cal_date" id="cal_date">{{$todaysDate->format('j')}}</div>
-            <div class="cal_month" id="cal_month">{{$todaysDate->format('F')}}</div>
-            <div class="cal_month" style="margin:0px;" id="cal_year">{{$todaysDate->format('Y')}}</div>
-          </div>
-          <div class="time_listing" id="time_listing">
-            @if(sizeof($events) != 0)
+          <!-- Cal Left -->
+          <div class="span5 cal_left">
+            <div class="row-fluid">
+              <div class="cal_date" id="cal_date">{{$todaysDate->format('j')}}</div>
+              <div class="cal_month" id="cal_month">{{$todaysDate->format('F')}}</div>
+              <div class="cal_month" style="margin:0px;" id="cal_year">{{$todaysDate->format('Y')}}</div>
+            </div>
+            <div class="time_listing" id="time_listing">
+              @if(sizeof($events) != 0)
               @foreach($events as $event)
-                <div class="row-fluid">
-                  <div class="span5 time_listing_1">{{date('g:ia', strtotime($event['start_time']))}} - {{date('g:ia', strtotime($event['end_time']))}} </div>
-                  <div class="span7 time_listing_1"><a data-toggle="modal" class="cal_event_title"  data-placement="right"  eventid={{$event['id']}} href="#myModal4">{{$event['title']}}</a></div>
-                </div>
-                <div class="calender-viewevent hide">
-                  @if($event['editdelete'] == 'yes')
-                  <div class="p-icon-inner"><a class="p-icon-1" title="Edit Event" href="{{url('/dashboard/calendar/event/edit',array($event['id']))}}"><img alt="" src="{{asset('assets/images/dashboard/p-edit.png')}}"></a><a class="p-icon-1 delevent" title="Delete Event" eventid={{$event['id']}} href="#"><img alt="" class="delevent" eventid={{$event['id']}} src="{{asset('assets/images/dashboard/p-delete.png')}}"></a></div>
-                  @endif
-                  <div class="viewevent-detail-inner">
-                    <!-- Left -->
-                    <div class="viewevent-left">
-                      <div class="viewevent-detail-1">Category:<span class="viewevent-note"> {{$event['category']}}</span></div>
-                      <div class="viewevent-detail-1">Note: <span class="viewevent-note"> {{$event['notes']}}</span></div>
-                      <div class="viewevent-detail-1">Location: <span class="viewevent-note"> {{$event['location']}}</span></div>
-                    </div>
-                    <!-- Right -->
-                    <div class="viewevent-right">
-                      <div class="viewevent-asignee">
-                        <label>People:</label>
-                        <div class="viewevent-asignee-right">
-                          @foreach($event['users'] as $user)
-                          <div class="viewevent-detail-3">{{$user['first_name']}} {{$user['last_name']}}</div>
-                          @endforeach
-                        </div>
+              <div class="row-fluid">
+                <div class="span5 time_listing_1">{{date('g:ia', strtotime($event['start_time']))}} - {{date('g:ia', strtotime($event['end_time']))}} </div>
+                <div class="span7 time_listing_1"><a data-toggle="modal" class="cal_event_title"  data-placement="right"  eventid={{$event['id']}} href="#myModal4">{{$event['title']}}</a></div>
+              </div>
+              <div class="calender-viewevent hide">
+                @if($event['editdelete'] == 'yes')
+                <div class="p-icon-inner"><a class="p-icon-1" title="Edit Event" href="{{url('/dashboard/calendar/event/edit',array($event['id']))}}"><img alt="" src="{{asset('assets/images/dashboard/p-edit.png')}}"></a><a class="p-icon-1 delevent" title="Delete Event" eventid={{$event['id']}} href="#"><img alt="" class="delevent" eventid={{$event['id']}} src="{{asset('assets/images/dashboard/p-delete.png')}}"></a></div>
+                @endif
+                <div class="viewevent-detail-inner">
+                  <!-- Left -->
+                  <div class="viewevent-left">
+                    <div class="viewevent-detail-1">事件分類:<span class="viewevent-note"> {{$event['category']}}</span></div>
+                    <div class="viewevent-detail-1">注意事項: <span class="viewevent-note"> {{$event['notes']}}</span></div>
+                    <div class="viewevent-detail-1">地點: <span class="viewevent-note"> {{$event['location']}}</span></div>
+                  </div>
+                  <!-- Right -->
+                  <div class="viewevent-right">
+                    <div class="viewevent-asignee">
+                      <label>People:</label>
+                      <div class="viewevent-asignee-right">
+                        @foreach($event['users'] as $user)
+                        <div class="viewevent-detail-3">{{$user['first_name']}} {{$user['last_name']}}</div>
+                        @endforeach
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
               @endforeach
-            @else
-            <div class="row-fluid">
-              <div class="span12 time_listing_1"> [ 無行程 !]</div>
+              @else
+              <div class="row-fluid">
+                <div class="span12 time_listing_1"> [ 無行程 ]</div>
+              </div>
+              @endif
             </div>
-            @endif
           </div>
-        </div>
           <!-- Cal Right -->
           <div class="span7 cal_right cal2">
             <script type="text/template" id="template-calendar">
@@ -86,20 +82,6 @@
                     <% for(var j = 0; j < 7; j++){ %>
                     <% var d = j + i * 7; %>
                     <td class='<%= days[d].classes %>'><div class='day-contents'><%= days[d].day %>
-                    <!--
-                    days[d].classes為決定是否可按下 
-                    回傳值為
-                      day event calendar-day-日期 為可按下
-                      day calendar-day-日期 為不可按下
-                    -->
-                    <!--
-                    days[d].day為日期(1 2 3.......)
-                    -->
-                    <!--
-                    day calendar-day-日期 ->白色不可按
-                    有event 為綠色
-                    有today表示為今日 為藍色
-                    -->
                     </div></td>
                     <% } %>
                   </tr>
@@ -114,14 +96,12 @@
     </div>
   </div>
 </div>
-
 <!-- Add Event Popup -->
 <div id="myModal" class="modal hide fade cal_light_box" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <form class="form-horizontal" action='calendar/add' method='post' id="addevent" data-validate="parsley">
     <div class="modal-header form_modal_header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       <h3 id="myModalLabel">
-      <!--標題 title-->
       <input type="text" name="title" id="title" class="popup_title_input" placeholder="標題" data-required="true"  data-show-errors="false" >
       </h3>
     </div>
@@ -132,20 +112,15 @@
             <div class="row-fluid">
               <div class="control-group">
                 <div class="row-fluid">
-                  <!--日期 date-->
                   <input id="date" name="date" type="text" class="span6 pull-left" placeholder="日期" data-required="true"  data-show-errors="true">
-                  <!--開始時間 starttime-->
                   <input id="starttime" name="starttime" type="text" class="span3 pull-left" placeholder="開始時間" data-required="true"  data-show-errors="true">
-                  <!--結束時間 endtime-->
                   <input id="endtime" name="endtime" type="text" class="span3 pull-left" placeholder="結束時間" data-required="true"  data-show-errors="true">
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="passwordinput">事件類別:</label>
+                <label class="control-label" for="passwordinput">事件類別 :</label>
                 <div class="controls">
                   <div class="task_select">
-                    <!--
-                      類別 category-->
                     <select name="category" id="category" tabindex="1" style="width:270px;" data-required="true"  data-show-errors="false">
                       <option name="" value="" selected="selected" title="">選擇類別</option>
                       <option  name="" value="Meeting - General" title="">Meeting - General</option>
@@ -159,16 +134,14 @@
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="passwordinput">注意事項:</label>
+                <label class="control-label" for="passwordinput">注意事項 :</label>
                 <div class="controls">
-                  <!--注意事項 note-->
-                  <textarea  name="note" id="note" class="add-proj-form-t" placeholder="注意事項"></textarea>
+                  <textarea  name="note" id="note" class="add-proj-form-t" placeholder="Note"></textarea>
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="passwordinput">參與者:<span class="tooltipster-icon" title="To add the people start typing the name and select the appropriate user from the list. Please note that only those name will appear in list who are registered in the app. Please add your name as well if you are one of them.">(?)</span></label>
+                <label class="control-label" for="passwordinput">參與者 :<span class="tooltipster-icon" title="To add the people start typing the name and select the appropriate user from the list. Please note that only those name will appear in list who are registered in the app. Please add your name as well if you are one of them.">(?)</span></label>
                 <div class="controls">
-                  <!--參與者 tagsinput-->
                   <input id="plugin" name="passwordinput" type="text" placeholder="新增姓名">
                 </div>
                 <div id="selected">
@@ -190,7 +163,7 @@
                 </div>
               </div>
             </div>
-          <script>
+            <script>
             function foo () {
             var title=document.getElementById("title").value;
             title = encodeURIComponent(title);
@@ -210,7 +183,7 @@
               '',config='height=300,width=450,toolbar=no, status=no, menubar=no, resizable=no, scrollbars=no');
             }
           </script>
-          <button class="submit pull-right" onclick="foo()">新增事件</a></button>
+          <button class="submit pull-right" onclick='foo()'>確認</a></button>
         </fieldset>
       </div>
     </div>
@@ -222,13 +195,13 @@
 <div id="myModal-item-delete" class="modal cal_light_box hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Really ?</h3>
+    <h3 id="myModalLabel">確定 ?</h3>
   </div>
   <div class="modal-body">
-    <div class="confirm-delete">Confirm delete the event?</div>
+    <div class="confirm-delete">確定要刪除嗎?</div>
     <div class="confirm-button">
-      <form method="post" action="calendar/event/delete">  <input type="hidden" name="deleteEventId" id="deleteEventId" value=  > <button class="submit">Yes please.</a></button></form>
-    <button class="submit dontdelete" id="dontdelete" >No Thanks.</a></button></div>
+      <form method="post" action="calendar/event/delete">  <input type="hidden" name="deleteEventId" id="deleteEventId" value=  > <button class="submit">Yes</a></button></form>
+    <button class="submit dontdelete" id="dontdelete" >No</a></button></div>
   </div>
 </div>
 <!-- End Delete Event Popup-->
@@ -293,18 +266,18 @@ $('.tooltipster-icon').tooltipster();
 <script>
 var calendars = {};
 $(document).ready(function() {
+
   calendars.clndr2 = $('.cal2').clndr({
     template: $('#template-calendar').html(),
     daysOfTheWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-    events: {{$newjson}},
-    //events: {{$projects_date}},
+    events: {{$eventDates}},
     clickEvents: {
       click: function(e) {
-        console.log($(e.element).hasClass("event"));
+        // console.log($(e.element).hasClass("event"));
         if ($(e.element).hasClass("event")) 
         {
-          var tempclass = $(e.element).attr("class"); //抓class中的值 "day event clalendar-day-2017-08-01"
-          var finaldate = tempclass.split('day-')[1]; //分割上面的字串 取得日期 "2017-08-01"
+          var tempclass = $(e.element).attr("class");
+          var finaldate = tempclass.split('day-')[1];
           var eventsModel = new EventsList([], {
             selectedDate: finaldate
           });
@@ -312,19 +285,17 @@ $(document).ready(function() {
             collection: eventsModel
           });
           eventsView.render();
-          // var eventsView2 = new EventsListView2({
-          //   collection: eventsModel
-          // });
-          // eventsView2.render();
+
         } else 
         {
-          
+
           //User has clicked a day in which no event is there
           // Hence do nothing
         }
       }
     }
   });
+
   $("#advanced-inputs").hide();
   $('#adv').click(function() {
     $("#advanced-inputs").slideToggle();
