@@ -38,6 +38,7 @@
                 	<button class="sign_in_button">確認</button>
                 </div>
                 <div class="forgot_link">忘記密碼? <a href="forgotpassword">Click here to restore</a></div>
+                <div class="forgot_link">申請帳號 <a href="adduser">Click here</a></div>
             </form>              
         </div>
     </div>

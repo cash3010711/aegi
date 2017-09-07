@@ -29,6 +29,12 @@ Route::get('/forgotpassword', function()
 {
 	return View::make('login.forgotpassword');
 });
+//
+Route::get('/adduser', function()
+{
+	return View::make('login.adduser');
+});//自創
+//
 Route::get('/login', function()
 {
 	if(!Sentry::check())
@@ -60,6 +66,9 @@ Route::post('/auth/updatepassword', 'AuthController@authUpdatePassword');
 Route::get('/auth/activateuser', 'AuthController@authActivateUser');
 Route::post('/auth/createuser', 'AuthController@authCreateUser');
 Route::get('/auth/verifyemail','AuthController@authVerifyEmail');
+//
+Route::post('/auth/adduser', 'AuthController@authAddUser');
+//
 Route::group(array('prefix'=>'dashboard','before'=>'auth'),function() 
 {
 

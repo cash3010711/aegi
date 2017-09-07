@@ -60,7 +60,7 @@ class Email{
 	 * @param string, string
 	 * @return bool
 	 */
-	public static function sendUserActivationEmail($email,$role)
+	public static function sendUserActivationEmail($email,$role,$first_name,$last_name,$password)
 	{
 			$tempPassword = Str::random(9);
 			try 
@@ -68,7 +68,9 @@ class Email{
 
 				$user = Sentry::register(array(
         		'email'    => $email,
-        		'password' => $tempPassword,
+				'password' => $password,
+				'first_name' => $first_name,
+				'last_name' => $last_name,
     			));
     			$activationCode = $user->getActivationCode();	
     			$group = Sentry::findGroupbyName($role);

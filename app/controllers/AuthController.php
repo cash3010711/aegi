@@ -66,7 +66,7 @@ class AuthController extends BaseController{
 	public function authForgotPassword()
 	{
 		//Get the email from the user
-		$email = Input::get('recoverEmail');
+		/*$email = Input::get('recoverEmail');
 		try
 		{
 			//Check if the user exists
@@ -85,7 +85,9 @@ class AuthController extends BaseController{
 		catch(UserNotFoundException $e)
 		{
 			return Redirect::to('login')->with('message','error104');
-		}
+		}*/
+		
+		return \Redirect::to('login');
 	}
 
 	/**
@@ -308,6 +310,23 @@ class AuthController extends BaseController{
 		{
 			Log::error('create user image error for '.$firstName.' '.$lastName.'error: '.$e->getMessage());
 			throw new SomeThingWentWrongException();
+		}
+	}
+
+	public function authAddUser()
+	{
+		//Get all data
+		$data = \Input::all();
+		$tempUsers = \User::all()->toArray();
+		
+
+		if($data['password'] == $data['confirmpass'] || $data['first_name'] == null || $data['last_name'] == null){
+			$result = Email::sendUserActivationEmail($data['email'],'user',$data['first_name'],$data['last_name'],$data['password']);
+        //Add user
+        //$result = $this->user->addUserWithDetails($data);
+		    return \Redirect::to('login');
+		}else{
+			return \Redirect::to('adduser');
 		}
 	}
 
