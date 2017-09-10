@@ -36,9 +36,12 @@
                 <input type="text" name="email_address" id="email_address" class="span12" placeholder="你的高齡基地用電子信箱" data-trigger="change" data-required="true" data-type="email">
                 <input type="text" name="email_password" id="email_password" class="span12" placeholder="你的電子信箱密碼">
                 <div class="sign_button_main forgot">
-                	<button class="sign_in_button" onclick="foo()">送出</button>
+                	<button class="sign_in_button" onclick="foo()">送出</button> <br><br>
                 </div>
-            </form>              
+            </form> 
+            <center>
+                <button class="sign_in_button" onclick="history.back()">取消</button>             
+            </center>
         </div>
     </div>
 </div>

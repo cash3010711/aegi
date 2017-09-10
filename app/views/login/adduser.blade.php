@@ -46,6 +46,9 @@
                 <button class="sign_in_button">送出</button>
             </center>
     </form>
+    <center>
+        <button class="sign_in_button" onclick="history.back()">取消</button>
+    </center>
     </div>
     </div>
 </body>
