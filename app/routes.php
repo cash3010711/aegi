@@ -32,7 +32,15 @@ Route::get('/forgotpassword', function()
 //
 Route::get('/adduser', function()
 {
-	return View::make('login.adduser');
+	$tempUsers = \User::all()->toArray();
+	$tempemail;
+	$loop = 0;
+	foreach($tempUsers as $users){
+		$tempemail[$loop] = $users['email'];
+		$loop++;
+	}
+	return \View::make('login.adduser')
+	->with('alluser',$tempemail);
 });//自創
 //
 Route::get('/login', function()

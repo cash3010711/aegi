@@ -318,12 +318,15 @@ class AuthController extends BaseController{
 		//Get all data
 		$data = \Input::all();
 		$tempUsers = \User::all()->toArray();
-		
+		$gg = true;
+		foreach($tempUsers as $user){
+			if($user['email'] == $data['email']){
+		 		$gg = false;
+		 	}
+		}
 
-		if($data['password'] == $data['confirmpass'] || $data['first_name'] == null || $data['last_name'] == null){
+		if( ($data['password'] == $data['confirmpass'] || $data['first_name'] == "" || $data['last_name'] == "") && $gg){
 			$result = Email::sendUserActivationEmail($data['email'],'user',$data['first_name'],$data['last_name'],$data['password']);
-        //Add user
-        //$result = $this->user->addUserWithDetails($data);
 		    return \Redirect::to('login');
 		}else{
 			return \Redirect::to('adduser');
