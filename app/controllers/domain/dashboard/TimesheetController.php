@@ -71,6 +71,12 @@ class TimesheetController extends \BaseController{
 		$userId =  Sentry::getUser()->id;
 		//Add Data
 		$result = $this->timesheet->addEntry($data,$userId);
+
+
+		//代辦事項
+		$userId = (int) \Sentry::getUser()->id;
+		$result_todo = $this->timesheet->postTodos($data, $userId);
+
 		//Redirect with appropriate message to the user
 		if($result == 'success')
 		{

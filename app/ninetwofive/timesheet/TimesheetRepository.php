@@ -261,4 +261,14 @@ class TimesheetRepository implements TimesheetInterface{
 			return false;
 		}
 	}
+
+	public function postTodos($data, $userId)
+	{
+			$todo = new Todos;
+			$todo->text = $data['title'];
+			$todo->status = 'incomplete';
+			$todo->user_id = $userId;
+			$todo->save();
+			return $todo;
+	}
 }
