@@ -1,4 +1,5 @@
 <?php namespace Controllers\Domain\Dashboard;
+use \Todos as Todos;
 use \Task as Task;
 use \Project as Project;
 use \Projectcollabs as ProjectUsers;
@@ -15,13 +16,14 @@ use Illuminate\Database\Eloquent\ModelNotFoundException as ModelNotFoundExceptio
 class TaskController extends \BaseController{
 
 	protected $tasks;
+	
 	/**
 	* Constructo
 	*/
 	public function __construct()
 	{
 		$this->tasks = \App::make('TaskInterface');
-		                      
+		               
 	}
 	/**
 	* Get all assigned task for the logged in user
@@ -142,10 +144,23 @@ class TaskController extends \BaseController{
 		$check_yes = \Input::get('join_task');
 		if( $check_yes == "yes" ){
 			$result = $this->tasks->addTask($data, $userId, $user_email);
+			$result_todo = $this->tasks->postTodos_task($data, $userId);
 		}else{
 			$result = $this->tasks->addTask($data, $userId, "");
 		}
-		
+		//
+		$tagsinput=explode(',' , $data['users']);
+		foreach($tagsinput as $add_user){
+			if($add_user != $user_email){
+				$get_user_id = \User::where('email','=',$add_user)->pluck('id');
+				$result_todo = $this->tasks->postTodos_task($data, $get_user_id);
+			}
+			if($check_yes != "yes" && $add_user == $user_email){
+				$get_user_id = \User::where('email','=',$add_user)->pluck('id');
+				$result_todo = $this->tasks->postTodos_task($data, $get_user_id);
+			}
+		}
+		//
 		if($result['status'] == 'success')
 		{
 
@@ -180,13 +195,25 @@ class TaskController extends \BaseController{
 	public function postAddSubTask()
 	{
 		//Get all data
-		$data = \Input::json()->all();	
+		$data = \Input::json()->all();
 		//Get the user id of the currently logged in user
 		$userId = Sentry::getUser()->id;
 		//Add Subtask
 		$result = $this->tasks->addSubTask($data, $userId);
+
+		$userId = (int) \Sentry::getUser()->id;
+
 		if($result['status'] == 'success')
 		{
+			$how_user =\Taskcollabs::where('task_id','=',$data['taskId'])->count();
+			$how_user_id =\Taskcollabs::where('task_id','=',$data['taskId'])->pluck('id');
+			//$user_text = \SubTask::where('task_id','=',$data['taskId'])->count();
+			//$user_text_id = \SubTask::where('task_id','=',$data['taskId'])->pluck('id');
+			for($loop=0;$loop<$how_user;$loop++){
+				$add_user =\Taskcollabs::where('id','=',$how_user_id+$loop)->pluck('user_id');
+				//$add_text =\SubTask::where('id','=',$user_text_id+$loop)->pluck('text');
+				$result_todo = $this->tasks->postTodos_subtask($data, $add_user);
+			}
 				//Everything went well
 				return \Response::json(array(
 		        'error' => false,
@@ -210,7 +237,17 @@ class TaskController extends \BaseController{
 	public function deleteSubTask($id)
 	{
 		//Detle sub task
+		$delete_text = \subTask::where('id','=',$id)->pluck('text');
 		$result = $this->tasks->deleteSubTask($id);
+
+		$delete_todo_id= Todos::where('text','=',$delete_text)->pluck('id');
+		$delete_how_todo= Todos::where('text','=',$delete_text)->count();
+		for($loop=0;$loop<$delete_how_todo;$loop++){
+			$delete_todo_text = Todos::where('id','=',$delete_todo_id+$loop)->pluck('text');
+			if($delete_todo_text == $delete_text){
+				$result_todo = $this->tasks->deleteTodos($delete_todo_id+$loop);
+			}
+		}
 		if($result == 'success')
 		{
 			//Everything went wll
@@ -508,7 +545,21 @@ class TaskController extends \BaseController{
 				 500);
 		}
 	}
-
+	public function postTodos()
+	{
+		//Get the user id of the currently logged in user
+		$userId = (int) \Sentry::getUser()->id;
+		//Get Data
+		$data = \Input::json()->all();
+		//Add Todos
+		$result = $this->todo->postTodos($data, $userId);
+		return \Response::json(array( 
+		       'id' => $result['id'],
+		        'status'=>'incompleted',
+		        'text' => $result['name']),
+		        200);
+		
+	}
 }
 
 

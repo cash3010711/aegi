@@ -6,7 +6,7 @@
 <div id="contentwrapper">
   <div class="main_content">
     <div class="row-fluid project_detail">
-      <h2><a href="{{url('/dashboard')}}">總覽</a> / 代辦事項</h2>
+      <h2><a href="{{url('/dashboard')}}">總覽</a> / 待辦事項</h2>
       <div class="span1"> </div>
       <div class="span10">
         <section id="todo">
@@ -14,7 +14,7 @@
           <a data-toggle="modal" href="{{url('/dashboard/mytodos/deletecompleted')}}" class="add_project">刪除完成事項</a>
           <a data-toggle="modal" href="{{url('/dashboard/mytodos/deleteall')}}" class="add_project">全部刪除</a>
           <div class="row-fluid">
-            <div class="span12 todo-detail-1"><input type="text" id="new-todo"   class="proj_create_in2 new-todo" name=""placeholder="代辦事項"></div>
+            <div class="span12 todo-detail-1"><input type="text" id="new-todo"   class="proj_create_in2 new-todo" name=""placeholder="待辦事項"></div>
           </div>
           <div class="row-fluid todo-detail-3">
             <ul id="todolist">

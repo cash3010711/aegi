@@ -37,6 +37,13 @@ interface TaskInterface{
 	public function deleteTask($taskId,$userId);
 	//Update SubTask
 	public function updateSubTask($id,$status);
-
+	//代辦事項連結
+	public function putTodos($data, $userId);
+	//代辦事項連結
+	public function postTodos_subtask($data, $userId);
+	//代辦事項連結
+	public function postTodos_task($data, $userId);
+	//代辦事項連結
+	public function deleteTodos($id);
 
 }

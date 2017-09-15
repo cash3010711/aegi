@@ -7,7 +7,7 @@
   <div class="main_content">
     <div class="row-fluid">
       <div class="span12 project_detail">
-        <h2><a href="{{url('/dashboard')}}">總覽</a> / 時間表</h2>
+        <h2><a href="{{url('/dashboard')}}">總覽</a> / 時程表</h2>
         <div class="add_project_main">
           <div class="timesheet-form">
             <label>選擇日期</label>

@@ -171,6 +171,7 @@
 {{ HTML::script('assets/js/simplelogin/parsley.js') }}
 {{ HTML::script('assets/js/dashboard/addtask.js') }}
 {{ HTML::script('assets/js/dashboard/datecheck.js') }}
+{{ HTML::script('assets/js/dashboard/todos.js') }}
 <script>
 $(document).ready(function() {
             $('.tooltipster-icon').tooltipster();

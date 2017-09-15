@@ -1,5 +1,6 @@
 <?php 
 require_once(app_path().'/models/Subtask.php');
+use \Todos as Todos;
 use \Exception as Exception;
 use \SomeThingWentWrongException as SomeThingWentWrongException;
 /**
@@ -276,8 +277,8 @@ class TaskRepository implements TaskInterface{
 			$subTask->save();
 			$result['status'] = 'success';
 			$result['id'] = $subTask->id;
+			
 			return $result;
-
 		}
 		catch(Exceptioin $e)
 		{
@@ -518,5 +519,52 @@ class TaskRepository implements TaskInterface{
 		}
 
 	}
+	public function putTodos($data, $userId)
+	{
+		try
+		{	
+			$todos = Todos::where('id','=',$data['id'])->where('user_id','=',$userId)->first();
+			$todos->status = $data['status'];
+			$todos->save();
+			return 'success';
+		}
+		catch(\Exception $e)
+		{
+			\Log::error('Something Went Wrong in Todo Repository - putTodos():'. $e->getMessage());
+			throw new SomeThingWentWrongException();
+		}
+	}
+	public function postTodos_subtask($data, $userId)
+	{
+			$todo = new Todos;
+			$todo->text =$data['subtask'];
+			$todo->status = 'incomplete';
+			$todo->user_id = $userId;
+			$todo->save();
+			return $todo;
+	}
+	public function postTodos_task($data, $userId)
+	{
+			$todo = new Todos;
+			$todo->text =$data['task_name'];
+			$todo->status = 'incomplete';
+			$todo->user_id = $userId;
+			$todo->save();
+			return $todo;
+	}
+	public function deleteTodos($id)
+	{
+		try
+		{
+			$todos = Todos::find($id);
+			$todos->forceDelete();
+			return 'success';
+		}
+		catch(Exception $e)
+		{
+			\Log::error('Something Went Wrong in Todo Repository - deleteTodos():'. $e->getMessage());
+			return 'error';
+		}
 
+	}
 }

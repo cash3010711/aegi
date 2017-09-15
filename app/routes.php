@@ -136,6 +136,8 @@ Route::group(array('prefix'=>'dashboard','before'=>'auth'),function()
 				Route::get('/tasks/project/{id?}', 'Controllers\Domain\Dashboard\TaskController@getProjectsTasks');
 				Route::get('/tasks/add','Controllers\Domain\Dashboard\TaskController@getAddTasks');
 
+				//Route::post('/tasks/add','Controllers\Domain\Dashboard\TaskController@postTodos');
+
 				Route::get('/tasks/add/files/{id?}','Controllers\Domain\Dashboard\TaskController@getAddFiles');
 				Route::post('/tasks/add/files/{id?}','Controllers\Domain\Dashboard\TaskController@postAddFiles');
 
