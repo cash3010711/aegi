@@ -39,13 +39,22 @@
               <img src="{{asset('assets/images/dashboard/p-edit.png')}}" height="15px" width="15px" alt=""></a>
               @endif
               </h3></div>
+
               <div class="viewuser_email">{{$user['email']}}
               @if( (($user['role'] != 'admin' and $user['role'] != 'ganaral_manager') or $user['id'] == $userid) or $role == 'admin') 
               <a href="{{url('/dashboard/admin/users/changeemail',array($user['id']))}}" class="p-icon-2" title="Change Email">
               <img src="{{asset('assets/images/dashboard/p-edit.png')}}" height="15px" width="15px" alt=""></a>
               @endif
               </div>
+
               <div class="viewuser_email">{{$user['role']}}
+              @if( (($user['role'] != 'admin' and $user['role'] != 'ganaral_manager') or $user['id'] == $userid) or $role == 'admin')
+              <a href="{{url('dashboard/admin/users/roles',array($user['id']))}}" class="p-icon-2" title="Change Role">
+              <img src="{{asset('assets/images/dashboard/p-edit.png')}}" height="15px" width="15px" alt=""></a>
+              @endif
+              </div>
+
+              <div class="viewuser_email">{{$phone[0]}}
               @if( (($user['role'] != 'admin' and $user['role'] != 'ganaral_manager') or $user['id'] == $userid) or $role == 'admin')
               <a href="{{url('dashboard/admin/users/roles',array($user['id']))}}" class="p-icon-2" title="Change Role">
               <img src="{{asset('assets/images/dashboard/p-edit.png')}}" height="15px" width="15px" alt=""></a>

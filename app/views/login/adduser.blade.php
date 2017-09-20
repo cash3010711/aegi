@@ -31,6 +31,7 @@
                 <input type="email" id="email" name="email" class="span12" placeholder="電子信箱" data-required="true"  data-show-errors="true">
                 <input type="password" id="password" name="password" class="span12" placeholder="密碼(至少9碼)" data-minlength="9">
                 <input type="password" id="confirmpass" name="confirmpass" class="span12" placeholder="確認密碼(至少9碼)" data-minlength="9">
+                <input type="text" id="phone" name="phone" class="span12" placeholder="連絡電話">
             </div>
         </div>
         <!-- <div>

@@ -1,4 +1,5 @@
 <?php
+use \UserProfile as UserProfile;
 /**
  *  Email Class.    
  * @version    1.0.0
@@ -60,12 +61,12 @@ class Email{
 	 * @param string, string
 	 * @return bool
 	 */
-	public static function sendUserActivationEmail($email,$role,$first_name,$last_name,$password)
+	public static function sendUserActivationEmail($email,$role,$first_name,$last_name,$password,$phone)
 	{
 			$tempPassword = Str::random(9);
 			try 
 			{
-
+				
 				$user = Sentry::register(array(
         		'email'    => $email,
 				'password' => $password,
@@ -79,10 +80,21 @@ class Email{
 				$data = array(
 			    	'link' => $link,
 			    		);
-				Mail::queue('emails.auth.activateuser', $data, function($message) use ($email)
+				/*Mail::queue('emails.auth.activateuser', $data, function($message) use ($email)
 				{
 				    $message->to($email)->subject('Invitation to Join 92five app');
-				});
+				});*/
+
+				$new_id = \User::where('email','=',$email)->pluck('id');
+				$quicknote = new \Quicknote;
+				$quicknote->user_id = $new_id;
+				$quicknote->save();
+				$userProfile = new \UserProfile;
+				$userProfile->id = $new_id;
+				$userProfile->phone = $phone;
+				$userProfile->save();
+				$imageResult = \App::make('AuthController')->{'createUserImage'}($user->id,$data['first_name'][0],$data['last_name'][0]);
+
 				return true;
 			}
 			catch (Exception $e)
@@ -124,7 +136,9 @@ class Email{
 			Log::error('Something went Wrong in Email Class - sendEmailAddressVerifyEmail():'.$e->getMessage());
    			return false;
 		}
+		
 
 	}
+	
 
 }

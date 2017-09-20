@@ -326,7 +326,7 @@ class AuthController extends BaseController{
 		}
 
 		if( ($data['password'] == $data['confirmpass'] || $data['first_name'] == "" || $data['last_name'] == "") && $gg){
-			$result = Email::sendUserActivationEmail($data['email'],'user',$data['first_name'],$data['last_name'],$data['password']);
+			$result = Email::sendUserActivationEmail($data['email'],'user',$data['first_name'],$data['last_name'],$data['password'],$data['phone']);
 		    return \Redirect::to('login');
 		}else{
 			return \Redirect::to('adduser');

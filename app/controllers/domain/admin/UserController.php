@@ -1,4 +1,7 @@
 <?php namespace Controllers\Domain\Admin;
+
+use \UserProfile as UserProfile;
+
 /**
  * User Controller.    
  * @version    1.0.0
@@ -27,16 +30,21 @@ class UserController extends \BaseController{
 
         $data = $this->user->getAllUsersData();
         $role;
+        $loop=0;
+        
 
         foreach($data as $user){
             if($user['id'] == $userID){
                 $role = $user['role'];
             }
+            $phone[$loop++] = UserProfile:::where('id','=',$user['id'])->pluck('phone');
         }
+        
         return \View::make('dashboard.users.viewall')
                         ->with('data',$data)
                         ->with('role',$role)
-                        ->with('userid',$userID);
+                        ->with('userid',$userID)
+                        ->with('phone',$phone);
     }
     /**
      * Generate View for Add user
