@@ -53,11 +53,11 @@
               <img src="{{asset('assets/images/dashboard/p-edit.png')}}" height="15px" width="15px" alt=""></a>
               @endif
               </div>
-
-              <div class="viewuser_email">{{$phone[0]}}
-              @if( (($user['role'] != 'admin' and $user['role'] != 'ganaral_manager') or $user['id'] == $userid) or $role == 'admin')
-              <a href="{{url('dashboard/admin/users/roles',array($user['id']))}}" class="p-icon-2" title="Change Role">
-              <img src="{{asset('assets/images/dashboard/p-edit.png')}}" height="15px" width="15px" alt=""></a>
+              
+              @if($phone[$loop] != null)
+              <div class="viewuser_email">{{$phone[$loop++]}}
+              @else
+              <div class="viewuser_email">未留下連絡方法{{$phone[$loop++]}}
               @endif
               </div>
               
