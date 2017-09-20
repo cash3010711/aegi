@@ -79,6 +79,13 @@
                       </div>
                     </div>
                   
+                    <div class="control-group">
+                    <label class="control-label" for="passwordinput">聯絡號碼:</label>
+                      <div class="controls">
+                        <input id="phone" name="phone" type="text" value="{{$data['phone']}}" placeholder="聯絡號碼" data-required="true" data-show-errors="true">
+                      </div>
+                    </div>
+
                   @if(Sentry::getUser()->inGroup(Sentry::getGroupProvider()->findByName('admin')))
                   
                     <div class="control-group">
