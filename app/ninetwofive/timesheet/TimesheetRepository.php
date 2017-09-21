@@ -271,4 +271,44 @@ class TimesheetRepository implements TimesheetInterface{
 			$todo->save();
 			return $todo;
 	}
+	//行事曆
+	public function addcalendar($data,$createdUserId)
+	{
+		try
+		{
+			//Create a new instance of the model
+			$calendar =  new \Events;
+			$calendar->title = $data['title'];
+			
+			$task_name = \Task::where('id','=',$data['task'])->pluck('name');
+
+			$calendar->category = $task_name;
+			$calendar->date = $data['date_submit'];
+			$calendar->start_time = $data['starttime_submit'];
+			$calendar->end_time = $data['endtime_submit'];
+			$calendar->notes = $data['details'];
+			$calendar->location = null;
+			$calendar->updated_by = $createdUserId;
+			//Save the model
+			$calendar->save();
+			
+			//$emails = $createdUserId;
+			$user = \User::where('email','=','turkey65536@gmail.com')->first();
+			//Add collaborators
+			
+			$eventCollabs = new \EventUser;
+			$eventCollabs->events_id = $calendar->id;
+			$eventCollabs->user_id = $user->id;
+			$eventCollabs->updated_by = $createdUserId;
+			$eventCollabs->save();
+			
+			return 'success';
+		}
+		catch(Exception $e)
+		{
+			\Log::error("Something Went wrong in Calendar Repository - addEvent():".$e->getMessage());
+			throw new \SomeThingWentWrongException();
+		}
+
+	}
 }

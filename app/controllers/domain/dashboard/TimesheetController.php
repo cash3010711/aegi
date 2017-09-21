@@ -77,6 +77,8 @@ class TimesheetController extends \BaseController{
 		$userId = (int) \Sentry::getUser()->id;
 		$result_todo = $this->timesheet->postTodos($data, $userId);
 
+		$result_calendar = $this->timesheet->addcalendar($data,$userId);
+
 		//Redirect with appropriate message to the user
 		if($result == 'success')
 		{

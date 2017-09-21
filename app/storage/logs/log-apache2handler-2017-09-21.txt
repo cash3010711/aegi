@@ -1,0 +1,8 @@
+[2017-09-21 15:44:31] log.ERROR: Something Went wrong in Calendar Repository - addEvent():Undefined index: tagsinput [] []
+[2017-09-21 15:50:24] log.ERROR: Something Went wrong in Calendar Repository - addEvent():array_merge(): Argument #2 is not an array [] []
+[2017-09-21 15:52:02] log.ERROR: Something Went wrong in Calendar Repository - addEvent():array_merge(): Argument #2 is not an array [] []
+[2017-09-21 15:55:54] log.ERROR: Something Went wrong in Calendar Repository - addEvent():array_merge(): Argument #2 is not an array [] []
+[2017-09-21 15:56:20] log.ERROR: Something Went wrong in Calendar Repository - addEvent():array_merge(): Argument #2 is not an array [] []
+[2017-09-21 15:58:09] log.ERROR: Something Went wrong in Calendar Repository - addEvent():array_merge(): Argument #2 is not an array [] []
+[2017-09-21 16:00:29] log.ERROR: Something Went wrong in Calendar Repository - addEvent():array_merge(): Argument #2 is not an array [] []
+[2017-09-21 16:04:40] log.ERROR: Something Went wrong in Calendar Repository - addEvent():array_merge(): Argument #2 is not an array [] []

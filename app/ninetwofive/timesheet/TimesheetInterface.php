@@ -26,4 +26,6 @@ interface TimesheetInterface{
 		public function checkPermission($entryId,$userId);
 		//代辦事項增加
 		public function postTodos($data, $userId);
+		//行事曆增加
+		public function addcalendar($data,$createdUserId);
 }
