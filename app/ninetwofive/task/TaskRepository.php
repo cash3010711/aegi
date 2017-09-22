@@ -567,4 +567,177 @@ class TaskRepository implements TaskInterface{
 		}
 
 	}
+
+	public function start_task_calendar($data,$createdUserId)
+	{
+		try
+		{	
+			//Create a new instance of the model
+			$calendar =  new \Events;
+			$calendar->title = $data['task_name'].' 任務開始';
+			$calendar->category = '任務開始';
+
+			$tempStartDate =\DateTime::createFromFormat('j F, Y',$data['startdate']);
+			//$task->start_date = $tempStartDate->format('Y-m-d');
+			$calendar->date = $tempStartDate->format('Y-m-d');
+			
+			$calendar->start_time = date("00:00:00");
+			$calendar->end_time = date("23:59:00");
+			$calendar->notes = $data['note'];
+			$calendar->location = null;
+			$calendar->updated_by = $createdUserId;
+			//Save the model
+			$calendar->save();
+			$emails =  preg_split("/[\s,]+/", $data['users']);
+			$usersId = \User::whereIn('email',$emails)->lists('id');
+			//Add collaborators
+			foreach ($usersId as $userId) 
+			{
+					$eventCollabs = new \EventUser;
+					$eventCollabs->events_id = $calendar->id;
+					$eventCollabs->user_id = $userId;
+					$eventCollabs->updated_by = $createdUserId;
+					$eventCollabs->save();
+			}
+			return 'success';
+		}
+		catch(Exception $e)
+		{
+			\Log::error("Something Went wrong in Calendar Repository - addEvent():".$e->getMessage());
+			throw new \SomeThingWentWrongException();
+		}
+
+	}
+
+	public function end_task_calendar($data,$createdUserId)
+	{
+		try
+		{	
+			//Create a new instance of the model
+			$calendar =  new \Events;
+			$calendar->title = $data['task_name'].' 任務結束';
+			$calendar->category = '任務結束';
+
+			$tempEndDate = \DateTime::createFromFormat('j F, Y',$data['enddate']);
+			//$task->start_date = $tempStartDate->format('Y-m-d');
+			$calendar->date = $tempEndDate->format('Y-m-d');
+			
+			$calendar->start_time = date("00:00:00");
+			$calendar->end_time = date("23:59:00");
+			$calendar->notes = $data['note'];
+			$calendar->location = null;
+			$calendar->updated_by = $createdUserId;
+			//Save the model
+			$calendar->save();
+			$emails =  preg_split("/[\s,]+/", $data['users']);
+			$usersId = \User::whereIn('email',$emails)->lists('id');
+			//Add collaborators
+			foreach ($usersId as $userId) 
+			{
+					$eventCollabs = new \EventUser;
+					$eventCollabs->events_id = $calendar->id;
+					$eventCollabs->user_id = $userId;
+					$eventCollabs->updated_by = $createdUserId;
+					$eventCollabs->save();
+			}
+			return 'success';
+		}
+		catch(Exception $e)
+		{
+			\Log::error("Something Went wrong in Calendar Repository - addEvent():".$e->getMessage());
+			throw new \SomeThingWentWrongException();
+		}
+
+	}
+
+	public function start_subtask_calendar($data,$createdUserId)
+	{
+		try
+		{	
+			$startdate = \Task::where('id','=',(int)$data['taskId'])->pluck('start_date');
+			$how_user = \Taskcollabs::where('task_id','=',(int)$data['taskId'])->count();
+			$first_user_id = \Taskcollabs::where('task_id','=',(int)$data['taskId'])->pluck('id');
+			//Create a new instance of the model
+			$calendar =  new \Events;
+			$calendar->title = $data['subtask'].' 子任務開始';
+			$calendar->category = '子任務開始';
+
+			$calendar->date = $startdate;
+			
+			$calendar->start_time = date("00:00:00");
+			$calendar->end_time = date("23:59:00");
+			$calendar->notes = null;
+			$calendar->location = null;
+			$calendar->updated_by = $createdUserId;
+			//Save the model
+			$calendar->save();
+
+			/*$emails =  preg_split("/[\s,]+/", $data['users']);
+			$usersId = \User::whereIn('email',$emails)->lists('id');*/
+
+			//Add collaborators
+			for($loop=0;$loop<$how_user;$loop++) 
+			{		
+					$task_user_id = \Taskcollabs::where('id','=',(int)$first_user_id+$loop)->pluck('user_id');
+					$eventCollabs = new \EventUser;
+					$eventCollabs->events_id = $calendar->id;
+					$eventCollabs->user_id = $task_user_id ;
+					$eventCollabs->updated_by = $createdUserId;
+					$eventCollabs->save();
+			}
+			return 'success';
+		}
+		catch(Exception $e)
+		{
+			\Log::error("Something Went wrong in Calendar Repository - addEvent():".$e->getMessage());
+			throw new \SomeThingWentWrongException();
+		}
+
+	}
+
+	public function end_subtask_calendar($data,$createdUserId)
+	{
+		try
+		{	
+			$startdate = \Task::where('id','=',(int)$data['taskId'])->pluck('end_date');
+			$how_user = \Taskcollabs::where('task_id','=',(int)$data['taskId'])->count();
+			$first_user_id = \Taskcollabs::where('task_id','=',(int)$data['taskId'])->pluck('id');
+			//Create a new instance of the model
+			$calendar =  new \Events;
+			$calendar->title = $data['subtask'].' 子任務結束';
+			$calendar->category = '子任務結束';
+
+			$calendar->date = $startdate;
+			
+			$calendar->start_time = date("00:00:00");
+			$calendar->end_time = date("23:59:00");
+			$calendar->notes = null;
+			$calendar->location = null;
+			$calendar->updated_by = $createdUserId;
+			//Save the model
+			$calendar->save();
+
+			/*$emails =  preg_split("/[\s,]+/", $data['users']);
+			$usersId = \User::whereIn('email',$emails)->lists('id');*/
+
+			//Add collaborators
+			for($loop=0;$loop<$how_user;$loop++) 
+			{		
+					$task_user_id = \Taskcollabs::where('id','=',(int)$first_user_id+$loop)->pluck('user_id');
+					$eventCollabs = new \EventUser;
+					$eventCollabs->events_id = $calendar->id;
+					$eventCollabs->user_id = $task_user_id ;
+					$eventCollabs->updated_by = $createdUserId;
+					$eventCollabs->save();
+			}
+			return 'success';
+		}
+		catch(Exception $e)
+		{
+			\Log::error("Something Went wrong in Calendar Repository - addEvent():".$e->getMessage());
+			throw new \SomeThingWentWrongException();
+		}
+
+	}
+
 }

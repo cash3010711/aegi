@@ -22,4 +22,7 @@ interface ProjectInterface{
 	function updateProject($data,$userId);
 	//Delete project
 	function deleteProject($projectId,$userId);
+	//add calendar
+	public function addstart_calendar($data,$createdUserId);
+	public function addend_calendar($data,$createdUserId);
 }

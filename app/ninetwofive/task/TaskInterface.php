@@ -45,5 +45,10 @@ interface TaskInterface{
 	public function postTodos_task($data, $userId);
 	//代辦事項連結
 	public function deleteTodos($id);
-
+	//task
+	public function start_task_calendar($data,$createdUserId);
+	public function end_task_calendar($data,$createdUserId);
+	//subtask
+	public function start_subtask_calendar($data,$createdUserId);
+	public function end_subtask_calendar($data,$createdUserId);
 }

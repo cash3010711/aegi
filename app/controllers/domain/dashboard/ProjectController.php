@@ -67,6 +67,9 @@ class ProjectController extends \BaseController{
 				$data['tagsinput'] .= $createdUserEmail;
 			}
 			$returnData = $this->project->addProject($data,$createdUserId);
+			$calendar = $this->project->addstart_calendar($data,$createdUserId);
+			$calendar = $this->project->addend_calendar($data,$createdUserId);
+
 			return \View::make('dashboard.projects.addfile')
 							->with('parentType', 'Project')
 							->with('parentName', $returnData['project_name'])

@@ -148,7 +148,12 @@ class TaskController extends \BaseController{
 		}else{
 			$result = $this->tasks->addTask($data, $userId, "");
 		}
-		//
+		//task
+		$data_nojson = \Input::all();
+		$result_task = $this->tasks->start_task_calendar($data_nojson, $userId);
+		$result_task = $this->tasks->end_task_calendar($data_nojson, $userId);
+		//$result_subtask = $this->tasks->end_task_calendar($data_nojson, $userId);
+		//todo
 		$tagsinput=explode(',' , $data['users']);
 		foreach($tagsinput as $add_user){
 			if($add_user != $user_email){
@@ -200,6 +205,10 @@ class TaskController extends \BaseController{
 		$userId = Sentry::getUser()->id;
 		//Add Subtask
 		$result = $this->tasks->addSubTask($data, $userId);
+
+		//subtask
+		$result_subtask = $this->tasks->start_subtask_calendar($data, $userId);
+		$result_subtask = $this->tasks->end_subtask_calendar($data, $userId);
 
 		$userId = (int) \Sentry::getUser()->id;
 

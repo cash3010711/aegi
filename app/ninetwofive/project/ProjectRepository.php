@@ -431,4 +431,87 @@ class ProjectRepository implements ProjectInterface{
 		}
 
 	}
+	//calendar
+	public function addstart_calendar($data,$createdUserId)
+	{
+		try
+		{
+			//Create a new instance of the model
+			$calendar =  new \Events;
+			$calendar->title = $data['project_name'].' 計畫開始';
+			$calendar->category = '計畫開始';
+
+			$tempStartDate =\DateTime::createFromFormat('j F, Y',$data['startdate']);
+			//$project->start_date = $tempStartDate->format('Y-m-d');
+			$calendar->date = $tempStartDate->format('Y-m-d');
+
+			$calendar->start_time = date("00:00:00");
+			$calendar->end_time = date("23:59:00");
+			$calendar->notes = $data['description'];
+			$calendar->location = null;
+			$calendar->updated_by = $createdUserId;
+			//Save the model
+			$calendar->save();
+			$emails =  preg_split("/[\s,]+/", $data['tagsinput']);
+			$usersId = \User::whereIn('email',$emails)->lists('id');
+			//Add collaborators
+			foreach ($usersId as $userId) 
+			{
+					$eventCollabs = new \EventUser;
+					$eventCollabs->events_id = $calendar->id;
+					$eventCollabs->user_id = $userId;
+					$eventCollabs->updated_by = $createdUserId;
+					$eventCollabs->save();
+			}
+			return 'success';
+		}
+		catch(Exception $e)
+		{
+			\Log::error("Something Went wrong in Calendar Repository - addEvent():".$e->getMessage());
+			throw new \SomeThingWentWrongException();
+		}
+
+	}
+
+	public function addend_calendar($data,$createdUserId)
+	{
+		try
+		{
+			//Create a new instance of the model
+			$calendar =  new \Events;
+			$calendar->title = $data['project_name'].' 計畫結束';
+			$calendar->category = '計畫結束';
+
+			$tempEndDate = \DateTime::createFromFormat('j F, Y',$data['enddate']);
+			//$project->start_date = $tempStartDate->format('Y-m-d');
+			$calendar->date = $tempEndDate->format('Y-m-d');
+
+			$calendar->start_time = date("00:00:00");
+			$calendar->end_time = date("23:59:00");
+			$calendar->notes = $data['description'];
+			$calendar->location = null;
+			$calendar->updated_by = $createdUserId;
+			//Save the model
+			$calendar->save();
+			$emails =  preg_split("/[\s,]+/", $data['tagsinput']);
+			$usersId = \User::whereIn('email',$emails)->lists('id');
+			//Add collaborators
+			foreach ($usersId as $userId) 
+			{
+					$eventCollabs = new \EventUser;
+					$eventCollabs->events_id = $calendar->id;
+					$eventCollabs->user_id = $userId;
+					$eventCollabs->updated_by = $createdUserId;
+					$eventCollabs->save();
+			}
+			return 'success';
+		}
+		catch(Exception $e)
+		{
+			\Log::error("Something Went wrong in Calendar Repository - addEvent():".$e->getMessage());
+			throw new \SomeThingWentWrongException();
+		}
+
+	}
+
 }
