@@ -1,0 +1,1 @@
+[2017-09-26 14:44:58] log.ERROR: Something Went wrong in Calendar Repository - addEvent():Trying to get property of non-object [] []

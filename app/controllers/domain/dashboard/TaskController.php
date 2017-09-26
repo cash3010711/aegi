@@ -207,8 +207,8 @@ class TaskController extends \BaseController{
 		$result = $this->tasks->addSubTask($data, $userId);
 
 		//subtask
-		$result_subtask = $this->tasks->start_subtask_calendar($data, $userId);
-		$result_subtask = $this->tasks->end_subtask_calendar($data, $userId);
+		//$result_subtask = $this->tasks->start_subtask_calendar($data, $userId);
+		//$result_subtask = $this->tasks->end_subtask_calendar($data, $userId);
 
 		$userId = (int) \Sentry::getUser()->id;
 

@@ -1,5 +1,6 @@
 <?php 
 use \Timesheet as Timesheet;
+use Cartalyst\Sentry\Facades\Laravel\Sentry as Sentry;
 use \SomeThingWentWrongException as SomeThingWentWrongException;
 /**
  * Timesheet Repository.    
@@ -293,7 +294,8 @@ class TimesheetRepository implements TimesheetInterface{
 			$calendar->save();
 			
 			//$emails = $createdUserId;
-			$user = \User::where('email','=','turkey65536@gmail.com')->first();
+			//$createdUserEmail = Sentry::getUser()->email;
+			$user = \User::where('id','=',$createdUserId)->first();
 			//Add collaborators
 			
 			$eventCollabs = new \EventUser;
